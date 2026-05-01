@@ -14,6 +14,7 @@
       --accent: #00e5a0;
       --accent2: #3b82f6;
       --accent3: #f59e0b;
+      --accent4: #a855f7;
       --text: #e8eaf0;
       --muted: #6b7280;
       --card: #13161e;
@@ -167,6 +168,13 @@
       font-weight: 800;
       color: var(--accent);
       display: block;
+      transition: transform 0.3s;
+    }
+    .stat-num.counting { animation: pulse-num 0.1s ease; }
+    @keyframes pulse-num {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
     }
     .stat-label {
       font-family: 'Space Mono', monospace;
@@ -231,6 +239,7 @@
     .badge-green { background: rgba(0,229,160,0.12); color: var(--accent); border: 1px solid rgba(0,229,160,0.3); }
     .badge-blue  { background: rgba(59,130,246,0.12); color: var(--accent2); border: 1px solid rgba(59,130,246,0.3); }
     .badge-amber { background: rgba(245,158,11,0.12); color: var(--accent3); border: 1px solid rgba(245,158,11,0.3); }
+    .badge-purple { background: rgba(168,85,247,0.12); color: var(--accent4); border: 1px solid rgba(168,85,247,0.3); }
 
     /* SKILLS */
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.5rem; }
@@ -240,8 +249,21 @@
       border-radius: 8px;
       padding: 1.75rem;
       transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(0,229,160,0.04));
+      pointer-events: none;
     }
     .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .skill-card.safety-card { border-color: rgba(168,85,247,0.3); }
+    .skill-card.safety-card:hover { border-color: var(--accent4); }
+    .skill-card.vba-card { border-color: rgba(245,158,11,0.3); }
+    .skill-card.vba-card:hover { border-color: var(--accent3); }
     .skill-icon { font-size: 1.5rem; margin-bottom: 1rem; }
     .skill-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
     .skill-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
@@ -255,6 +277,68 @@
       border-radius: 3px;
       letter-spacing: 0.05em;
     }
+    .skill-tag-purple {
+      background: rgba(168,85,247,0.15);
+      color: var(--accent4);
+      border: 1px solid rgba(168,85,247,0.3);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+    .skill-tag-amber {
+      background: rgba(245,158,11,0.15);
+      color: var(--accent3);
+      border: 1px solid rgba(245,158,11,0.3);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    /* VBA CODE BLOCK */
+    .vba-snippet {
+      margin-top: 1rem;
+      background: #0d0f14;
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 6px;
+      padding: 0.85rem 1rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      position: relative;
+    }
+    .vba-snippet .vba-label {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.6rem;
+      font-size: 0.55rem;
+      color: var(--accent3);
+      opacity: 0.7;
+      letter-spacing: 0.1em;
+    }
+    .vba-kw { color: #569cd6; }
+    .vba-fn { color: #dcdcaa; }
+    .vba-str { color: #ce9178; }
+    .vba-cm { color: #6a9955; }
+    .vba-num { color: #b5cea8; }
+    .vba-type { color: #4ec9b0; }
+
+    /* SAFETY HIGHLIGHT BOX */
+    .safety-highlight {
+      background: rgba(168,85,247,0.06);
+      border: 1px solid rgba(168,85,247,0.25);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: #c4b5fd;
+      line-height: 1.5;
+    }
+    .safety-highlight strong { color: var(--accent4); }
 
     /* TOOLS */
     .tools-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
@@ -415,6 +499,24 @@
     .avail-box ul li { font-size: 0.875rem; color: var(--muted); padding-left: 1rem; position: relative; }
     .avail-box ul li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; }
 
+    /* MODE TABS */
+    .mode-tabs { display: flex; gap: 0.75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
+    .mode-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid;
+      font-weight: 700;
+    }
+    .mode-full { background: rgba(0,229,160,0.12); color: var(--accent); border-color: rgba(0,229,160,0.4); }
+    .mode-part { background: rgba(59,130,246,0.12); color: var(--accent2); border-color: rgba(59,130,246,0.4); }
+
     /* LANG */
     .lang-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
     .lang-chip {
@@ -457,6 +559,13 @@
     .delay-4 { animation-delay: 0.55s; }
     .delay-5 { animation-delay: 0.7s; }
 
+    /* NUMBER COUNTER ANIMATION */
+    @keyframes countUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .stat-num.animated { animation: countUp 0.5s ease forwards; }
+
     .cursor {
       display: inline-block;
       width: 2px;
@@ -467,6 +576,14 @@
       vertical-align: text-bottom;
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* GLOW PULSE on stat */
+    @keyframes glowPulse {
+      0%   { text-shadow: 0 0 0px transparent; }
+      50%  { text-shadow: 0 0 18px rgba(0,229,160,0.5); }
+      100% { text-shadow: 0 0 0px transparent; }
+    }
+    .stat-num.glow { animation: glowPulse 1.2s ease; }
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
@@ -502,10 +619,10 @@
   <div class="hero-tag fade-up delay-1">MSc Process Engineering · HAW Hamburg</div>
   <h1>
     <span class="hero-name fade-up delay-2">Hananiah<br>Shadrach Daniel</span>
-    <span class="hero-title fade-up delay-3">Engineer.</span>
+    <span class="hero-title fade-up delay-3">Process Engineer.</span>
   </h1>
   <p class="hero-desc fade-up delay-4">
-    Highly analytical Process Engineer, currently specializing in Process Engineering (MSc) at HAW Hamburg. Expert at bridging the gap between core engineering principles and digital transformation, leveraging simulation tools, data analytics, and automation to optimize technical systems.Process engineer combining simulation, data analytics, and automation.
+    Highly analytical Process Engineer, currently specializing in Process Engineering (MSc) at HAW Hamburg. Expert at bridging the gap between core engineering principles and digital transformation — leveraging simulation tools, data analytics, automation, functional safety, and industrial cybersecurity to optimize technical systems.
   </p>
   <div class="hero-cta fade-up delay-5">
     <a href="#projects" class="btn btn-primary">↓ View Projects</a>
@@ -514,19 +631,23 @@
   </div>
   <div class="hero-stats fade-up delay-5">
     <div>
-      <span class="stat-num">3+</span>
+      <span class="stat-num" data-target="3" data-suffix="+" data-decimals="0">0+</span>
       <span class="stat-label">Internships</span>
     </div>
     <div>
-      <span class="stat-num">6+</span>
+      <span class="stat-num" data-target="6" data-suffix="+" data-decimals="0">0+</span>
       <span class="stat-label">Simulation Tools</span>
     </div>
     <div>
-      <span class="stat-num">2</span>
+      <span class="stat-num" data-target="2" data-suffix="" data-decimals="0">0</span>
       <span class="stat-label">Languages</span>
     </div>
     <div>
-      <span class="stat-num">1.6</span>
+      <span class="stat-num" data-target="2.0" data-suffix="" data-decimals="1">0.0</span>
+      <span class="stat-label">Master GPA</span>
+    </div>
+    <div>
+      <span class="stat-num" data-target="1.6" data-suffix="" data-decimals="1">0.0</span>
       <span class="stat-label">Bachelor GPA</span>
     </div>
   </div>
@@ -544,27 +665,26 @@
           with a B.Tech in Pharmaceutical Technology (Engineering) from Anna University — graduated First Class with Distinction.
         </p>
         <p>
-Engineering & Simulation: Proficient in process modeling, bioreactor kinetics, and thermal/mechanical process engineering. Skilled in creating digital twins and flow simulations.
-
-Data Analytics & Digitalization: Expertise in transforming raw technical data into actionable insights via Power BI dashboards, KPI reporting, and Python-based analysis.
-
-Project Management & Documentation: Experienced in structured reporting, SharePoint administration, and agile workflows (Jira/Confluence). Strong focus on version control and technical documentation.
-
-Quality & Compliance: Solid understanding of ISO 9001, 14001, and 45001 standards, including root-cause analysis and standardized process monitoring.
-
-Operational Excellence: Competent in plant monitoring, troubleshooting, and the integration of automation rigs (e.g., Arudino, Raspberry Pi) into laboratory or industrial environments.
+          <strong>Engineering &amp; Simulation:</strong> Proficient in process modeling, bioreactor kinetics, and thermal/mechanical process engineering. Skilled in creating digital twins and flow simulations.
         </p>
         <p>
-        <h2> Professional Profile</h2> 
-Analytical & Proactive: Strong ability to independently structure complex processes and meet deadlines in fast-paced engineering environments.
-
-Communication: Fluent in English with professional working proficiency in German (B1), capable of bridging technical and administrative teams.
-
-Methodical: Dedicated to meticulous documentation, structured data storage, and the continuous improvement of internal technical workflows.
-          </p>
+          <strong>Data Analytics &amp; Digitalization:</strong> Expertise in transforming raw technical data into actionable insights via Power BI dashboards, KPI reporting, and Python-based analysis.
+        </p>
+        <p>
+          <strong>Functional Safety &amp; Cybersecurity:</strong> Working knowledge of IEC 61508/61511 functional safety lifecycle, HAZOP/LOPA, SIL determination, and IEC 62443 / ISO 27001 aligned OT/IT cybersecurity.
+        </p>
+        <p>
+          <strong>Project Management &amp; Documentation:</strong> Experienced in structured reporting, SharePoint administration, and agile workflows (Jira/Confluence). Strong focus on version control and technical documentation.
+        </p>
+        <p>
+          <strong>Quality &amp; Compliance:</strong> Solid understanding of ISO 9001, 14001, and 45001 standards, including root-cause analysis and standardized process monitoring.
+        </p>
+        <p>
+          <strong>Operational Excellence:</strong> Competent in plant monitoring, troubleshooting, and integration of automation rigs (Arduino, Raspberry Pi) into laboratory or industrial environments. Proficient in VBA macros for Excel automation and reporting.
+        </p>
         <p>
           I'm proactive, detail-oriented, and deadline-driven. I work well independently and in teams,
-          and I'm currently seeking <strong>Full-time , <strong>part-time opportunities (20 hrs/week)</strong> in Hamburg —
+          and I'm currently seeking <strong>Full-time</strong> or <strong>part-time Werkstudent opportunities (20 hrs/week)</strong> in Hamburg —
           immediately available.
         </p>
 
@@ -599,14 +719,18 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
         <div class="info-row">
           <span class="label">Focus</span>
           <span class="value" style="display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end;">
-            <span class="badge badge-green">Process Control - AI & ML</span>
+            <span class="badge badge-green">Process Control · AI &amp; ML</span>
             <span class="badge badge-blue">Simulation</span>
-            <span class="badge badge-amber">Chemical & Bioprocesses</span>
+            <span class="badge badge-amber">Chemical &amp; Bioprocesses</span>
+            <span class="badge badge-purple">Functional Safety</span>
           </span>
         </div>
         <div class="info-row">
           <span class="label">Availability</span>
-          <span class="value"> Full-Time , Part-Time (20 hrs/week) · Immediate</span>
+          <span class="value">
+            <span class="badge badge-green" style="margin-bottom:0.3rem;">● Full-Time</span>
+            <span class="badge badge-blue">● Werkstudent 20 hrs/week</span>
+          </span>
         </div>
         <div class="info-row">
           <span class="label">Email</span>
@@ -682,6 +806,35 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
         </div>
       </div>
 
+      <!-- VBA CARD -->
+      <div class="skill-card vba-card">
+        <div class="skill-icon">📋</div>
+        <h3>VBA &amp; Excel Automation</h3>
+        <p>Macro development for automated reporting pipelines, dynamic dashboards, data validation routines, and batch processing of engineering datasets in Excel.</p>
+        <div class="vba-snippet">
+          <span class="vba-label">VBA</span>
+<span class="vba-cm">' Auto-generate process report</span>
+<span class="vba-kw">Sub</span> <span class="vba-fn">GenerateShiftReport</span>()
+  <span class="vba-kw">Dim</span> ws <span class="vba-kw">As</span> <span class="vba-type">Worksheet</span>
+  <span class="vba-kw">Dim</span> rng <span class="vba-kw">As</span> <span class="vba-type">Range</span>
+  <span class="vba-kw">Set</span> ws = Sheets(<span class="vba-str">"ProcessData"</span>)
+  ws.Range(<span class="vba-str">"B2"</span>).Value = <span class="vba-fn">Now</span>()
+  <span class="vba-fn">Call</span> <span class="vba-fn">CalcKPIs</span>(ws, <span class="vba-num">3</span>, <span class="vba-num">50</span>)
+  <span class="vba-fn">MsgBox</span> <span class="vba-str">"Report ready!"</span>
+<span class="vba-kw">End Sub</span>
+
+<span class="vba-kw">Sub</span> <span class="vba-fn">CalcKPIs</span>(ws, r1, r2)
+  <span class="vba-kw">Dim</span> avg <span class="vba-kw">As</span> <span class="vba-type">Double</span>
+  avg = <span class="vba-fn">WorksheetFunction</span>.<span class="vba-fn">Average</span>( _
+        ws.Range(<span class="vba-str">"C"</span>&amp;r1&amp;<span class="vba-str">":C"</span>&amp;r2))
+  ws.Range(<span class="vba-str">"E2"</span>).Value = avg
+<span class="vba-kw">End Sub</span>
+        </div>
+        <div class="skill-tags" style="margin-top:0.75rem;">
+          <span class="skill-tag-amber">VBA Macros</span><span class="skill-tag-amber">Excel Automation</span><span class="skill-tag-amber">Dynamic Reports</span><span class="skill-tag-amber">Data Pipelines</span>
+        </div>
+      </div>
+
       <div class="skill-card">
         <div class="skill-icon">📁</div>
         <h3>Project Management &amp; Documentation</h3>
@@ -697,6 +850,22 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
         <p>Machine operation, shift support, visual/documentary quality checks, SPC, root-cause analysis, ISO 9001/14001/45001 compliance.</p>
         <div class="skill-tags">
           <span class="skill-tag">SPC</span><span class="skill-tag">QC</span><span class="skill-tag">CAPA</span><span class="skill-tag">ISO</span>
+        </div>
+      </div>
+
+      <!-- FUNCTIONAL SAFETY CARD -->
+      <div class="skill-card safety-card" style="grid-column: span 1;">
+        <div class="skill-icon">🛡️</div>
+        <h3>Functional Safety &amp; Industrial Cybersecurity</h3>
+        <p>Strong competencies spanning the full functional safety lifecycle and IT/OT cybersecurity framework for industrial control systems.</p>
+        <div class="safety-highlight">
+          <strong>Functional Safety (IEC 61508 / IEC 61511):</strong> SIL determination, SIF/SIS design, reliability analysis, safety requirements specification, HAZOP &amp; LOPA, PFD<sub>avg</sub>/PFH verification, and proof-test planning.
+        </div>
+        <div class="safety-highlight" style="margin-top:0.5rem;">
+          <strong>Industrial Cybersecurity (IEC 62443 / ISO 27001):</strong> Zone–conduit architecture, defense-in-depth, PLC/SCADA hardening, network segmentation, and secure integration of OT/IT control systems.
+        </div>
+        <div class="skill-tags" style="margin-top:0.75rem;">
+          <span class="skill-tag-purple">IEC 61508</span><span class="skill-tag-purple">IEC 61511</span><span class="skill-tag-purple">HAZOP</span><span class="skill-tag-purple">LOPA</span><span class="skill-tag-purple">SIL</span><span class="skill-tag-purple">IEC 62443</span><span class="skill-tag-purple">ISO 27001</span><span class="skill-tag-purple">SCADA Hardening</span>
         </div>
       </div>
 
@@ -719,6 +888,7 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
         <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>Arduino</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>Raspberry Pi 4</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>PLC / SCADA</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>VBA / Excel Macros</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>SAP</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>SharePoint</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>MS Office 365</div>
@@ -737,63 +907,8 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
 
       <div class="project-card">
         <div class="project-num">PRJ-001</div>
-        <h3>Extraction Process Simulation</h3>
-        <p>Developed full technical process documentation, flowcharts, and structured reports for an extraction process. Simulated process parameters in Aspen Plus and MATLAB, linking data insights to process efficiency and planning decisions.</p>
-        <div class="project-footer">
-          <div class="project-tools">
-            <span class="skill-tag">Aspen Plus</span>
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">AutoCAD</span>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">PRJ-002</div>
-        <h3>Process Simulation &amp; Optimisation</h3>
-        <p>Created complete technical documentation and workflow mappings for a chemical process. Simulated process steps in Aspen Plus, generated engineering reports, and standardised documentation for reproducibility and availability assessment.</p>
-        <div class="project-footer">
-          <div class="project-tools">
-            <span class="skill-tag">Aspen Plus</span>
-            <span class="skill-tag">Documentation</span>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">PRJ-003</div>
-        <h3>Bioreactor Lab-Scale Development (IIT Madras)</h3>
-        <p>Supported process development and simulation at IIT Madras across 1–100 L lab-scale experiments. Structured documentation of results, process analysis, and deviation reporting in close collaboration with the project and lab lead.</p>
-        <div class="project-footer">
-          <div class="project-tools">
-            <span class="skill-tag">Bioprocess</span>
-            <span class="skill-tag">Lab Scale</span>
-            <span class="skill-tag">Reporting</span>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">PRJ-004</div>
-        <h3>PID Controller Tuning — CSTR</h3>
-        <p>Designed and simulated a CSTR temperature control loop. Compared Ziegler–Nichols, IMC, and relay-feedback tuning methods. Validated closed-loop performance and documented step response metrics.</p>
-        <div class="project-footer">
-          <div class="project-tools">
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">Simulink</span>
-            <span class="skill-tag">PID</span>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">PRJ-005</div>
-        <h3>CFD Analysis — Mixing Tank</h3>
-        <p>Simulated turbulent flow and mixing in a baffled stirred tank in STAR-CCM+. Evaluated Rushton and pitched-blade impeller configurations for mixing time, power number, and mass transfer coefficient.</p>
+        <h3>CFD Analysis — Counter-Current Heat Exchanger</h3>
+        <p>Conjugate heat transfer simulation with structured mesh in STAR-CCM+. Achieved &lt;1.5% deviation from analytical NTU-effectiveness method. Compared turbulence models for shell-side and tube-side flow accuracy.</p>
         <div class="project-footer">
           <div class="project-tools">
             <span class="skill-tag">STAR-CCM+</span>
@@ -805,14 +920,70 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
       </div>
 
       <div class="project-card">
-        <div class="project-num">PRJ-006</div>
-        <h3>Process Data Dashboard — Power BI</h3>
-        <p>Built an interactive Power BI dashboard for monitoring key process variables (T, P, flow). Integrated SPC charts (X-bar, R) and KPI cards for real-time shift reporting. Connected to live data via Excel/CSV pipeline.</p>
+        <div class="project-num">PRJ-002</div>
+        <h3>Ammonia Synthesis Simulation &amp; MATLAB Modeling</h3>
+        <p>Equilibrium and PFR modeling of a multi-bed ammonia converter in DWSIM and MATLAB. Sensitivity analysis on temperature, pressure, and recycle ratio. Validated against industrial plant data.</p>
         <div class="project-footer">
           <div class="project-tools">
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">DWSIM</span>
+            <span class="skill-tag">Equilibrium</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-003</div>
+        <h3>Cost &amp; Time Estimation — Project Management</h3>
+        <p>Full project planning framework: CBS, WBS, CPM/PERT scheduling, Monte Carlo risk simulation, Earned Value Management (EVM), and Gantt chart reporting for an engineering project lifecycle.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">CPM/PERT</span>
+            <span class="skill-tag">Monte Carlo</span>
+            <span class="skill-tag">EVM</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-004</div>
+        <h3>Cost Engineering — Hydrogen via Ammonia Cracking</h3>
+        <p>Techno-economic analysis for green hydrogen production route. CAPEX/OPEX breakdown, Levelized Cost of Hydrogen (LCOH) sensitivity, and scenario comparison across plant scales in Excel.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Excel</span>
+            <span class="skill-tag">LCOH</span>
+            <span class="skill-tag">Cost Engineering</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-005</div>
+        <h3>Lactic Acid Recovery &amp; Purification — Process Design</h3>
+        <p>Full process design: PFD, P&amp;ID, control loop specification, pump and heating tank sizing calculations. Documented instrumentation and control philosophy for downstream bioprocess recovery.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">PFD</span>
+            <span class="skill-tag">P&ID</span>
+            <span class="skill-tag">Process Control</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-006</div>
+        <h3>Cellulose Extraction &amp; HPMC Conversion (IIT Madras)</h3>
+        <p>Process simulation and optimization of cellulose extraction and HPMC conversion at IIT Madras. Aspen Plus modeling, Power BI dashboards for KPI tracking, and structured lab-to-scale documentation.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Aspen Plus</span>
             <span class="skill-tag">Power BI</span>
-            <span class="skill-tag">SPC</span>
-            <span class="skill-tag">DAX</span>
+            <span class="skill-tag">Bioprocess</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -820,6 +991,62 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
 
       <div class="project-card">
         <div class="project-num">PRJ-007</div>
+        <h3>Modelling of Chemical Processes &amp; Control Systems</h3>
+        <p>Numerical methods, ODE solving, CRE problems, and process optimization in Python and MATLAB. Includes CSTR temperature control with PID tuning comparison (Ziegler–Nichols, IMC, relay-feedback).</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">Simulink</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-008</div>
+        <h3>H₂O₂ Batch Reactor Design</h3>
+        <p>Kinetics-based Excel and Python/MATLAB modeling of hydrogen peroxide batch decomposition. Batch simulation, conversion–time profiles, and sizing of jacketed reactor with safety margin analysis.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">Excel</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-009</div>
+        <h3>Digital Plant Design — Arduino + Raspberry Pi Automation</h3>
+        <p>End-to-end automation rig: sensor integration (temperature, pressure, flow), actuator control, and structured data logging via Raspberry Pi 4. Arduino used for low-level sensor interfacing and PWM control.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Arduino</span>
+            <span class="skill-tag">Raspberry Pi</span>
+            <span class="skill-tag">Python</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-010</div>
+        <h3>Optical Sensor Color Detection System</h3>
+        <p>Python-based optical detection system for classifying green vs white glass shards using sensor data and DOE (Design of Experiments). Optimized detection thresholds via statistical calibration and repeatability testing.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Sensors</span>
+            <span class="skill-tag">DOE</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-011</div>
         <h3>Fed-Batch Bioreactor Kinetic Model</h3>
         <p>Implemented Monod kinetics for E. coli fed-batch cultivation in Python. Solved ODE system with SciPy, optimised exponential feeding strategy to maximise biomass, and performed parameter sensitivity analysis.</p>
         <div class="project-footer">
@@ -833,14 +1060,14 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
       </div>
 
       <div class="project-card">
-        <div class="project-num">PRJ-008</div>
-        <h3>Raspberry Pi 4 SCADA Monitor</h3>
-        <p>Developed a lightweight SCADA-style monitoring system on Raspberry Pi 4: Modbus sensor polling, SQLite data logging, and a Flask web dashboard served to a local network for live process visibility.</p>
+        <div class="project-num">PRJ-012</div>
+        <h3>Process Data Dashboard — Power BI</h3>
+        <p>Built an interactive Power BI dashboard for monitoring key process variables (T, P, flow). Integrated SPC charts (X-bar, R) and KPI cards for real-time shift reporting. Connected to live data via Excel/CSV pipeline.</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">Raspberry Pi</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">Modbus</span>
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">SPC</span>
+            <span class="skill-tag">DAX</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -923,9 +1150,12 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
     <h2>Contact</h2>
     <div class="contact-grid">
       <div>
+        <div class="mode-tabs">
+          <span class="mode-tab mode-full">● Full-Time Available</span>
+          <span class="mode-tab mode-part">● Werkstudent · 20 hrs/week</span>
+        </div>
         <p class="contact-desc">
-          I'm available for part-time roles (16–20 hrs/week) in Hamburg, immediately.
-          Whether it's a working student position, internship, or project collaboration — reach out.
+          I'm available for <strong>full-time positions</strong> as well as <strong>Werkstudent / part-time roles (16–20 hrs/week)</strong> in Hamburg — immediately. Whether it's a working student position, internship, or project collaboration — reach out.
         </p>
         <div class="contact-links">
           <a href="mailto:shadrach2702@gmail.com" class="contact-link">
@@ -949,10 +1179,10 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
         <div class="avail-box">
           <h4>⚡ Availability</h4>
           <ul>
-            <li>16–20 hours per week</li>
+            <li>Full-Time positions — immediately available</li>
+            <li>Werkstudent / Part-Time — 16–20 hours per week</li>
             <li>Flexible shifts (day, weekend)</li>
             <li>Weekly presence in Hamburg</li>
-            <li>Immediately available</li>
             <li>Physically fit — can lift up to 25 kg</li>
           </ul>
         </div>
@@ -996,6 +1226,54 @@ Methodical: Dedicated to meticulous documentation, structured data storage, and 
     const body = encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + msg);
     window.location.href = 'mailto:shadrach2702@gmail.com?subject=' + subject + '&body=' + body;
   }
+
+  /* ── ANIMATED NUMBER COUNTER ── */
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.target);
+    const suffix = el.dataset.suffix || '';
+    const decimals = parseInt(el.dataset.decimals) || 0;
+    const duration = 1400;
+    const startTime = performance.now();
+
+    function easeOutQuart(t) {
+      return 1 - Math.pow(1 - t, 4);
+    }
+
+    function update(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutQuart(progress);
+      const current = eased * target;
+
+      el.textContent = current.toFixed(decimals) + suffix;
+
+      // subtle glow pulse at end
+      if (progress >= 1) {
+        el.textContent = target.toFixed(decimals) + suffix;
+        el.classList.add('glow');
+        setTimeout(() => el.classList.remove('glow'), 1200);
+        return;
+      }
+      requestAnimationFrame(update);
+    }
+    requestAnimationFrame(update);
+  }
+
+  // Trigger counters when hero stats enter viewport
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const statNums = entry.target.querySelectorAll('.stat-num[data-target]');
+        statNums.forEach((el, i) => {
+          setTimeout(() => animateCounter(el), i * 120);
+        });
+        statsObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  const heroStats = document.querySelector('.hero-stats');
+  if (heroStats) statsObserver.observe(heroStats);
 </script>
 
 </body>
