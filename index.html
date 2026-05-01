@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hananiah Shadrach Daniel — Process Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0c10;
+      --surface: #111318;
+      --border: #1e2230;
+      --accent: #00e5a0;
+      --accent2: #3b82f6;
+      --accent3: #f59e0b;
+      --text: #e8eaf0;
+      --muted: #6b7280;
+      --card: #13161e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.3;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      background: rgba(10,12,16,0.88);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* SECTIONS */
+    section { position: relative; z-index: 1; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .hero-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
+    h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-name { display: block; color: var(--text); }
+    .hero-title {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--accent);
+    }
+    .hero-desc {
+      max-width: 580px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.8rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: var(--accent); color: #000; font-weight: 700; }
+    .btn-primary:hover { background: #00ffb3; transform: translateY(-2px); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* SECTION WRAP */
+    .section-wrap { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; }
+    .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+    }
+
+    /* ABOUT */
+    #about { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about-text p { color: var(--muted); margin-bottom: 1.25rem; font-size: 1rem; }
+    .about-text p strong { color: var(--text); }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+      gap: 1rem;
+    }
+    .info-row .label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .info-row .value { color: var(--text); text-align: right; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .badge-green { background: rgba(0,229,160,0.12); color: var(--accent); border: 1px solid rgba(0,229,160,0.3); }
+    .badge-blue  { background: rgba(59,130,246,0.12); color: var(--accent2); border: 1px solid rgba(59,130,246,0.3); }
+    .badge-amber { background: rgba(245,158,11,0.12); color: var(--accent3); border: 1px solid rgba(245,158,11,0.3); }
+
+    /* SKILLS */
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1.5rem; }
+    .skill-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .skill-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+    .skill-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .skill-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+    .skill-tag {
+      background: var(--border);
+      color: var(--muted);
+      font-family: 'Space Mono', monospace;
+      font-size: 0.63rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 3px;
+      letter-spacing: 0.05em;
+    }
+
+    /* TOOLS */
+    .tools-row { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
+    .tool-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.6rem 1.1rem;
+      font-size: 0.85rem;
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+    .tool-chip:hover { border-color: var(--accent); }
+    .tool-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    /* PROJECTS */
+    #projects { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+    }
+    .project-card h3 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; line-height: 1.3; }
+    .project-card p { color: var(--muted); font-size: 0.875rem; flex: 1; }
+    .project-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .project-tools { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .project-link {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .project-link:hover { text-decoration: underline; }
+
+    /* EXPERIENCE TIMELINE */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 6px; bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+    .timeline-item { position: relative; margin-bottom: 3rem; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.35rem;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+    .timeline-date {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+    .timeline-item h3 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 0.15rem; }
+    .timeline-item .org { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.6rem; }
+    .timeline-item ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .timeline-item ul li {
+      color: var(--muted);
+      font-size: 0.875rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .timeline-item ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.75rem;
+    }
+
+    /* CONTACT */
+    #contact { background: var(--surface); border-top: 1px solid var(--border); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .contact-desc { color: var(--muted); font-size: 1rem; margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.875rem;
+      transition: border-color 0.2s, transform 0.15s;
+      word-break: break-all;
+    }
+    .contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
+    .contact-link .icon { font-size: 1.2rem; flex-shrink: 0; }
+
+    /* AVAILABILITY */
+    .avail-box {
+      background: rgba(0,229,160,0.06);
+      border: 1px solid rgba(0,229,160,0.25);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+    }
+    .avail-box h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+    .avail-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .avail-box ul li { font-size: 0.875rem; color: var(--muted); padding-left: 1rem; position: relative; }
+    .avail-box ul li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; }
+
+    /* LANG */
+    .lang-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .lang-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.875rem;
+    }
+    .lang-chip .lang-level {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      display: block;
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 2rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    footer p { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--muted); letter-spacing: 0.08em; }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.25s; }
+    .delay-3 { animation-delay: 0.4s; }
+    .delay-4 { animation-delay: 0.55s; }
+    .delay-5 { animation-delay: 0.7s; }
+
+    .cursor {
+      display: inline-block;
+      width: 2px;
+      height: 0.85em;
+      background: var(--accent);
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+      vertical-align: text-bottom;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      #hero { padding: 6rem 1.5rem 3rem; }
+      .section-wrap { padding: 4rem 1.5rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">HSD<span class="cursor"></span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag fade-up delay-1">MSc Process Engineering · HAW Hamburg</div>
+  <h1>
+    <span class="hero-name fade-up delay-2">Hananiah<br>Shadrach Daniel</span>
+    <span class="hero-title fade-up delay-3">Engineer.</span>
+  </h1>
+  <p class="hero-desc fade-up delay-4">
+    Pharmaceutical-trained process engineer combining simulation, data analytics, and automation.
+    From bioreactor kinetics and Aspen Plus models to Power BI dashboards and PLC/SCADA systems —
+    I bridge the gap between process fundamentals and digital tools.
+  </p>
+  <div class="hero-cta fade-up delay-5">
+    <a href="#projects" class="btn btn-primary">↓ View Projects</a>
+    <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="btn btn-ghost" target="_blank">Portfolio Drive ↗</a>
+    <a href="https://linkedin.com/in/hananiah-shadrach-daniel" class="btn btn-ghost" target="_blank">LinkedIn ↗</a>
+  </div>
+  <div class="hero-stats fade-up delay-5">
+    <div>
+      <span class="stat-num">3+</span>
+      <span class="stat-label">Internships</span>
+    </div>
+    <div>
+      <span class="stat-num">6+</span>
+      <span class="stat-label">Simulation Tools</span>
+    </div>
+    <div>
+      <span class="stat-num">2</span>
+      <span class="stat-label">Languages</span>
+    </div>
+    <div>
+      <span class="stat-num">1.6</span>
+      <span class="stat-label">Bachelor GPA</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="section-tag">// 01 — About Me</div>
+    <h2>Who I Am</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm <strong>Hananiah Shadrach Daniel</strong>, a motivated MSc student in <strong>Process Engineering at HAW Hamburg</strong>,
+          with a B.Tech in Pharmaceutical Technology (Engineering) from Anna University — graduated First Class with Distinction.
+        </p>
+        <p>
+          My background spans pharmaceutical manufacturing, process simulation, and research at IIT Madras.
+          I'm comfortable working across the full engineering stack: designing processes, simulating them in Aspen Plus or DWSIM,
+          running CFD in STAR-CCM+, and communicating results through structured reports and Power BI dashboards.
+        </p>
+        <p>
+          I'm proactive, detail-oriented, and deadline-driven. I work well independently and in teams,
+          and I'm currently seeking <strong>part-time opportunities (16–20 hrs/week)</strong> in Hamburg —
+          immediately available.
+        </p>
+
+        <div style="margin-top:1.5rem;">
+          <div class="section-tag" style="margin-bottom:0.75rem;">// Languages</div>
+          <div class="lang-row">
+            <div class="lang-chip">
+              🇩🇪 Deutsch
+              <span class="lang-level">B1 — Sichere Kenntnisse</span>
+            </div>
+            <div class="lang-chip">
+              🇬🇧 English
+              <span class="lang-level">C1 — Professional</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-aside">
+        <div class="info-row">
+          <span class="label">Degree</span>
+          <span class="value">MSc Process Engineering (HAW Hamburg)</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Bachelor</span>
+          <span class="value">B.Tech Pharmaceutical Tech · Anna University</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Location</span>
+          <span class="value">Hamburg, Germany</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Focus</span>
+          <span class="value" style="display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end;">
+            <span class="badge badge-green">Process Control</span>
+            <span class="badge badge-blue">Simulation</span>
+            <span class="badge badge-amber">Bioprocesses</span>
+          </span>
+        </div>
+        <div class="info-row">
+          <span class="label">Availability</span>
+          <span class="value">16–20 hrs/week · Immediate</span>
+        </div>
+        <div class="info-row">
+          <span class="label">Email</span>
+          <span class="value"><a href="mailto:shadrach2702@gmail.com" style="color:var(--accent);text-decoration:none;">shadrach2702@gmail.com</a></span>
+        </div>
+        <div class="info-row">
+          <span class="label">Status</span>
+          <span class="badge badge-green">● Open to Opportunities</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-tag">// 02 — Expertise</div>
+    <h2>Skills &amp; Tools</h2>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="skill-icon">⚙️</div>
+        <h3>Process Engineering &amp; Control</h3>
+        <p>Mass/energy balances, P&amp;IDs, equipment sizing. PID tuning, cascade and feedforward control. Process monitoring and deviation analysis.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">PID</span><span class="skill-tag">P&ID</span><span class="skill-tag">SOP</span><span class="skill-tag">Root-Cause</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🧬</div>
+        <h3>Bioprocess &amp; Pharmaceutical Systems</h3>
+        <p>Bioreactor design, kinetic modeling, sterile process design, GMP documentation, SOP creation, validation, and audit support.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Bioreactors</span><span class="skill-tag">GMP</span><span class="skill-tag">Validation</span><span class="skill-tag">SOPs</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🖥️</div>
+        <h3>Process Simulation</h3>
+        <p>Steady-state and dynamic simulation in Aspen Plus and DWSIM. Thermodynamic package selection, sensitivity analysis, energy integration.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Aspen Plus</span><span class="skill-tag">DWSIM</span><span class="skill-tag">Pinch Analysis</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🌊</div>
+        <h3>CFD &amp; Fluid Dynamics</h3>
+        <p>Mesh generation, turbulence modeling (k-ε, SST), heat and mass transfer for reactors, mixing tanks, and heat exchangers.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">STAR-CCM+</span><span class="skill-tag">ANSYS Fluent</span><span class="skill-tag">Turbulence</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📊</div>
+        <h3>Data Analytics &amp; Reporting</h3>
+        <p>Statistical process control, time-series analysis, KPI dashboards, structured technical reporting, and data-driven decision support.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Power BI</span><span class="skill-tag">Python</span><span class="skill-tag">R</span><span class="skill-tag">Excel</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h3>Automation &amp; Embedded Systems</h3>
+        <p>PLC ladder logic, SCADA HMI design, sensor integration. Hardware prototyping with Arduino and Raspberry Pi 4. Modbus communication.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">PLC/SCADA</span><span class="skill-tag">Arduino</span><span class="skill-tag">Raspberry Pi 4</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">📁</div>
+        <h3>Project Management &amp; Documentation</h3>
+        <p>Technical documentation, structured filing, version management, PowerPoint reporting, SharePoint, Jira/Confluence, and ISO compliance.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">SharePoint</span><span class="skill-tag">Jira</span><span class="skill-tag">ISO 9001</span><span class="skill-tag">MS Office 365</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="skill-icon">🏭</div>
+        <h3>Production &amp; Quality</h3>
+        <p>Machine operation, shift support, visual/documentary quality checks, SPC, root-cause analysis, ISO 9001/14001/45001 compliance.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">SPC</span><span class="skill-tag">QC</span><span class="skill-tag">CAPA</span><span class="skill-tag">ISO</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TOOL CHIPS -->
+    <div style="margin-top:3rem;">
+      <div class="section-tag" style="margin-bottom:1.25rem;">// All Tools</div>
+      <div class="tools-row">
+        <div class="tool-chip"><span class="tool-dot" style="background:#00e5a0;"></span>Aspen Plus</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#00e5a0;"></span>DWSIM</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#3b82f6;"></span>MATLAB</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#3b82f6;"></span>Python</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#3b82f6;"></span>R</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>STAR-CCM+</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>ANSYS Fluent</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#a855f7;"></span>Power BI</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#a855f7;"></span>AutoCAD</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#a855f7;"></span>Autodesk Inventor</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>Arduino</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>Raspberry Pi 4</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>PLC / SCADA</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>SAP</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>SharePoint</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>MS Office 365</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>Jira / Confluence</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-tag">// 03 — Projects</div>
+    <h2>Featured Work</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-num">PRJ-001</div>
+        <h3>Extraction Process Simulation</h3>
+        <p>Developed full technical process documentation, flowcharts, and structured reports for an extraction process. Simulated process parameters in Aspen Plus and MATLAB, linking data insights to process efficiency and planning decisions.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Aspen Plus</span>
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">AutoCAD</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-002</div>
+        <h3>Process Simulation &amp; Optimisation</h3>
+        <p>Created complete technical documentation and workflow mappings for a chemical process. Simulated process steps in Aspen Plus, generated engineering reports, and standardised documentation for reproducibility and availability assessment.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Aspen Plus</span>
+            <span class="skill-tag">Documentation</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-003</div>
+        <h3>Bioreactor Lab-Scale Development (IIT Madras)</h3>
+        <p>Supported process development and simulation at IIT Madras across 1–100 L lab-scale experiments. Structured documentation of results, process analysis, and deviation reporting in close collaboration with the project and lab lead.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Bioprocess</span>
+            <span class="skill-tag">Lab Scale</span>
+            <span class="skill-tag">Reporting</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-004</div>
+        <h3>PID Controller Tuning — CSTR</h3>
+        <p>Designed and simulated a CSTR temperature control loop. Compared Ziegler–Nichols, IMC, and relay-feedback tuning methods. Validated closed-loop performance and documented step response metrics.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">MATLAB</span>
+            <span class="skill-tag">Simulink</span>
+            <span class="skill-tag">PID</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-005</div>
+        <h3>CFD Analysis — Mixing Tank</h3>
+        <p>Simulated turbulent flow and mixing in a baffled stirred tank in STAR-CCM+. Evaluated Rushton and pitched-blade impeller configurations for mixing time, power number, and mass transfer coefficient.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">STAR-CCM+</span>
+            <span class="skill-tag">CFD</span>
+            <span class="skill-tag">Turbulence</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-006</div>
+        <h3>Process Data Dashboard — Power BI</h3>
+        <p>Built an interactive Power BI dashboard for monitoring key process variables (T, P, flow). Integrated SPC charts (X-bar, R) and KPI cards for real-time shift reporting. Connected to live data via Excel/CSV pipeline.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">SPC</span>
+            <span class="skill-tag">DAX</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-007</div>
+        <h3>Fed-Batch Bioreactor Kinetic Model</h3>
+        <p>Implemented Monod kinetics for E. coli fed-batch cultivation in Python. Solved ODE system with SciPy, optimised exponential feeding strategy to maximise biomass, and performed parameter sensitivity analysis.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SciPy</span>
+            <span class="skill-tag">Monod</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-num">PRJ-008</div>
+        <h3>Raspberry Pi 4 SCADA Monitor</h3>
+        <p>Developed a lightweight SCADA-style monitoring system on Raspberry Pi 4: Modbus sensor polling, SQLite data logging, and a Flask web dashboard served to a local network for live process visibility.</p>
+        <div class="project-footer">
+          <div class="project-tools">
+            <span class="skill-tag">Raspberry Pi</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Modbus</span>
+          </div>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE & EDUCATION -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-tag">// 04 — Experience &amp; Education</div>
+    <h2>Background</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">Oct 2025 — Present</div>
+        <h3>MSc Process Engineering</h3>
+        <div class="org">HAW Hamburg · Hamburg, Germany · GPA: 2.0</div>
+        <ul>
+          <li>Advanced process simulation, control systems, bioprocess engineering</li>
+          <li>Working with Aspen Plus, STAR-CCM+, MATLAB, and Python in coursework projects</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Jun 2024 — Dec 2024</div>
+        <h3>Project Trainee</h3>
+        <div class="org">Indian Institute of Technology (IIT) Madras · Chennai, India</div>
+        <ul>
+          <li>Project management support, technical documentation, status reports, structured filing</li>
+          <li>Process and data analysis to assess efficiency, deviations, and optimisation potential</li>
+          <li>Presentations, reports, and process documents in PowerPoint, Excel, Word</li>
+          <li>Process development, simulation, and lab experiments (1–100 L scale)</li>
+          <li>Close coordination with project and lab leadership on progress, risks, and improvements</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Jun 2023 — Jul 2023</div>
+        <h3>Summer Intern — Production Support &amp; SOPs</h3>
+        <div class="org">Kausikh Therapeutics Pvt Ltd · Chennai, India</div>
+        <ul>
+          <li>Created and maintained SOPs, validation documents, and technical reports</li>
+          <li>Supported small audits and organisational project tasks</li>
+          <li>Structured document filing and implementation of formal adjustments</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Apr 2022 — May 2022</div>
+        <h3>Intern Trainee — Technical Plant &amp; Process Data</h3>
+        <div class="org">Teyro Labs Private Limited · Chengalpattu, India</div>
+        <ul>
+          <li>Technical data collection, analysis, and preparation for decision support</li>
+          <li>Support of inspection and documentation processes</li>
+          <li>Process research and reporting to optimise operational workflows</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Nov 2020 — May 2024</div>
+        <h3>B.Tech Pharmaceutical Technology (Engineering)</h3>
+        <div class="org">Anna University · ACT Campus, Chennai, India · First Class with Distinction · GPA: 1.6</div>
+        <ul>
+          <li>Process Engineering, Reaction Kinetics, Thermodynamics, Bioprocess Engineering</li>
+          <li>Pharmaceutical manufacturing, QA/QC, regulatory compliance</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="section-tag">// 05 — Get in Touch</div>
+    <h2>Contact</h2>
+    <div class="contact-grid">
+      <div>
+        <p class="contact-desc">
+          I'm available for part-time roles (16–20 hrs/week) in Hamburg, immediately.
+          Whether it's a working student position, internship, or project collaboration — reach out.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:shadrach2702@gmail.com" class="contact-link">
+            <span class="icon">✉️</span>
+            <span>shadrach2702@gmail.com</span>
+          </a>
+          <a href="tel:+4915510861130" class="contact-link">
+            <span class="icon">📱</span>
+            <span>+49 155 1086 1130</span>
+          </a>
+          <a href="https://linkedin.com/in/hananiah-shadrach-daniel" class="contact-link" target="_blank">
+            <span class="icon">💼</span>
+            <span>linkedin.com/in/hananiah-shadrach-daniel</span>
+          </a>
+          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="contact-link" target="_blank">
+            <span class="icon">📁</span>
+            <span>Project Portfolio (Google Drive)</span>
+          </a>
+        </div>
+
+        <div class="avail-box">
+          <h4>⚡ Availability</h4>
+          <ul>
+            <li>16–20 hours per week</li>
+            <li>Flexible shifts (day, weekend)</li>
+            <li>Weekly presence in Hamburg</li>
+            <li>Immediately available</li>
+            <li>Physically fit — can lift up to 25 kg</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-tag" style="margin-bottom:1.25rem;">// Send a Message</div>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div style="display:flex;flex-direction:column;gap:0.4rem;">
+            <label style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Your Name</label>
+            <input id="f-name" type="text" placeholder="Jane Smith" style="background:var(--card);border:1px solid var(--border);border-radius:5px;padding:0.8rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" />
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;">
+            <label style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Email</label>
+            <input id="f-email" type="email" placeholder="jane@company.com" style="background:var(--card);border:1px solid var(--border);border-radius:5px;padding:0.8rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" />
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;">
+            <label style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Message</label>
+            <textarea id="f-msg" rows="5" placeholder="Tell me about the opportunity..." style="background:var(--card);border:1px solid var(--border);border-radius:5px;padding:0.8rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;resize:vertical;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+          </div>
+          <a id="mailto-btn" href="#" class="btn btn-primary" style="align-self:flex-start;" onclick="sendMail(event)">Send via Email →</a>
+          <p style="font-size:0.75rem;color:var(--muted);">Opens your email client — or email directly at <a href="mailto:shadrach2702@gmail.com" style="color:var(--accent);">shadrach2702@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Hananiah Shadrach Daniel · Hamburg, Germany</p>
+  <p>Built with HTML/CSS · Hosted on GitHub Pages</p>
+</footer>
+
+<script>
+  function sendMail(e) {
+    e.preventDefault();
+    const name = document.getElementById('f-name').value || 'A visitor';
+    const email = document.getElementById('f-email').value || '';
+    const msg = document.getElementById('f-msg').value || '';
+    const subject = encodeURIComponent('Portfolio Enquiry from ' + name);
+    const body = encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + msg);
+    window.location.href = 'mailto:shadrach2702@gmail.com?subject=' + subject + '&body=' + body;
+  }
+</script>
+
+</body>
+</html>
