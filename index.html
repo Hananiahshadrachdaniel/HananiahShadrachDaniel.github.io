@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,12 +63,14 @@
       background: rgba(10,12,16,0.88);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      gap: 1rem;
     }
     .nav-logo {
       font-family: 'Space Mono', monospace;
       font-size: 0.82rem;
       color: var(--accent);
       letter-spacing: 0.08em;
+      flex-shrink: 0;
     }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
@@ -81,17 +83,38 @@
       transition: color 0.2s;
     }
     .nav-links a:hover { color: var(--accent); }
-    <div class="lang-switcher">
-  <select id="lang-select" onchange="changeLanguage(this.value)">
-    <option value="en">EN</option>
-    <option value="de">DE</option>
-    <option value="es">ES</option>
-    <option value="it">IT</option>
-    <option value="ja">JP</option>
-    <option value="ta">TA</option>
-    <option value="hi">HI</option>
-  </select>
-</div>
+
+    /* LANGUAGE SWITCHER */
+    .lang-switcher {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      flex-shrink: 0;
+    }
+    .lang-btn {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      padding: 0.3rem 0.65rem;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.18s;
+      text-transform: uppercase;
+    }
+    .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .lang-btn.active {
+      background: rgba(0,229,160,0.12);
+      border-color: rgba(0,229,160,0.5);
+      color: var(--accent);
+    }
+    .lang-divider {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--border);
+    }
 
     /* SECTIONS */
     section { position: relative; z-index: 1; }
@@ -179,13 +202,6 @@
       font-weight: 800;
       color: var(--accent);
       display: block;
-      transition: transform 0.3s;
-    }
-    .stat-num.counting { animation: pulse-num 0.1s ease; }
-    @keyframes pulse-num {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-      100% { transform: scale(1); }
     }
     .stat-label {
       font-family: 'Space Mono', monospace;
@@ -273,8 +289,6 @@
     .skill-card:hover { border-color: var(--accent); transform: translateY(-4px); }
     .skill-card.safety-card { border-color: rgba(168,85,247,0.3); }
     .skill-card.safety-card:hover { border-color: var(--accent4); }
-    .skill-card.vba-card { border-color: rgba(245,158,11,0.3); }
-    .skill-card.vba-card:hover { border-color: var(--accent3); }
     .skill-icon { font-size: 1.5rem; margin-bottom: 1rem; }
     .skill-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
     .skill-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
@@ -308,37 +322,6 @@
       border-radius: 3px;
       letter-spacing: 0.05em;
     }
-
-    /* VBA CODE BLOCK */
-    .vba-snippet {
-      margin-top: 1rem;
-      background: #0d0f14;
-      border: 1px solid rgba(245,158,11,0.2);
-      border-radius: 6px;
-      padding: 0.85rem 1rem;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      line-height: 1.6;
-      overflow-x: auto;
-      position: relative;
-    }
-    .vba-snippet .vba-label {
-      position: absolute;
-      top: 0.4rem;
-      right: 0.6rem;
-      font-size: 0.55rem;
-      color: var(--accent3);
-      opacity: 0.7;
-      letter-spacing: 0.1em;
-    }
-    .vba-kw { color: #569cd6; }
-    .vba-fn { color: #dcdcaa; }
-    .vba-str { color: #ce9178; }
-    .vba-cm { color: #6a9955; }
-    .vba-num { color: #b5cea8; }
-    .vba-type { color: #4ec9b0; }
-
-    /* SAFETY HIGHLIGHT BOX */
     .safety-highlight {
       background: rgba(168,85,247,0.06);
       border: 1px solid rgba(168,85,247,0.25);
@@ -423,7 +406,7 @@
     }
     .project-link:hover { text-decoration: underline; }
 
-    /* EXPERIENCE TIMELINE */
+    /* TIMELINE */
     .timeline { position: relative; padding-left: 2rem; }
     .timeline::before {
       content: '';
@@ -490,8 +473,6 @@
     }
     .contact-link:hover { border-color: var(--accent); transform: translateX(4px); }
     .contact-link .icon { font-size: 1.2rem; flex-shrink: 0; }
-
-    /* AVAILABILITY */
     .avail-box {
       background: rgba(0,229,160,0.06);
       border: 1px solid rgba(0,229,160,0.25);
@@ -509,8 +490,6 @@
     .avail-box ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
     .avail-box ul li { font-size: 0.875rem; color: var(--muted); padding-left: 1rem; position: relative; }
     .avail-box ul li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-size: 0.8rem; }
-
-    /* MODE TABS */
     .mode-tabs { display: flex; gap: 0.75rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
     .mode-tab {
       display: inline-flex;
@@ -527,8 +506,6 @@
     }
     .mode-full { background: rgba(0,229,160,0.12); color: var(--accent); border-color: rgba(0,229,160,0.4); }
     .mode-part { background: rgba(59,130,246,0.12); color: var(--accent2); border-color: rgba(59,130,246,0.4); }
-
-    /* LANG */
     .lang-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
     .lang-chip {
       background: var(--card);
@@ -543,27 +520,30 @@
       color: var(--accent);
       display: block;
     }
-    .lang-switcher {
-  position: absolute;
-  right: 2rem;
-  top: 50%;
-  transform: translateY(-50%);
-}
 
-.lang-switcher select {
-  background: var(--card);
-  color: var(--text);
-  border: 1px solid var(--border);
-  padding: 0.4rem 0.6rem;
-  border-radius: 4px;
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  cursor: pointer;
-}
-
-.lang-switcher select:hover {
-  border-color: var(--accent);
-}
+    /* CONTACT FORM */
+    .form-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+    .form-input {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 0.8rem 1rem;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { border-color: var(--accent); }
 
     /* FOOTER */
     footer {
@@ -591,12 +571,12 @@
     .delay-4 { animation-delay: 0.55s; }
     .delay-5 { animation-delay: 0.7s; }
 
-    /* NUMBER COUNTER ANIMATION */
-    @keyframes countUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes glowPulse {
+      0%   { text-shadow: 0 0 0px transparent; }
+      50%  { text-shadow: 0 0 18px rgba(0,229,160,0.5); }
+      100% { text-shadow: 0 0 0px transparent; }
     }
-    .stat-num.animated { animation: countUp 0.5s ease forwards; }
+    .stat-num.glow { animation: glowPulse 1.2s ease; }
 
     .cursor {
       display: inline-block;
@@ -609,15 +589,10 @@
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
-    /* GLOW PULSE on stat */
-    @keyframes glowPulse {
-      0%   { text-shadow: 0 0 0px transparent; }
-      50%  { text-shadow: 0 0 18px rgba(0,229,160,0.5); }
-      100% { text-shadow: 0 0 0px transparent; }
-    }
-    .stat-num.glow { animation: glowPulse 1.2s ease; }
+    /* LANG TRANSITION */
+    .lang-fade { transition: opacity 0.15s ease; }
+    .lang-fade.switching { opacity: 0; }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.5rem; }
       .nav-links { display: none; }
@@ -638,49 +613,54 @@
 <nav>
   <div class="nav-logo">HSD<span class="cursor"></span></div>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#about" data-i18n="nav_about">Über mich</a></li>
+    <li><a href="#skills" data-i18n="nav_skills">Fähigkeiten</a></li>
+    <li><a href="#projects" data-i18n="nav_projects">Projekte</a></li>
+    <li><a href="#experience" data-i18n="nav_experience">Erfahrung</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Kontakt</a></li>
   </ul>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLang('de')" id="btn-de">DE</button>
+    <span class="lang-divider">|</span>
+    <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+  </div>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-tag fade-up delay-1">MSc Process Engineering · HAW Hamburg</div>
+  <div class="hero-tag fade-up delay-1" data-i18n="hero_tag">MSc Verfahrenstechnik · HAW Hamburg</div>
   <h1>
     <span class="hero-name fade-up delay-2">Hananiah<br>Shadrach Daniel</span>
-    <span class="hero-title fade-up delay-3">Process Engineer.</span>
+    <span class="hero-title fade-up delay-3" data-i18n="hero_title">Verfahrenstechniker.</span>
   </h1>
-  <p class="hero-desc fade-up delay-4">
-    Highly analytical Process Engineer, currently specializing in Process Engineering (MSc) at HAW Hamburg. Expert at bridging the gap between core engineering principles and digital transformation; leveraging simulation tools, data analytics, automation, functional safety, and industrial cybersecurity to optimize technical systems.
+  <p class="hero-desc fade-up delay-4" data-i18n="hero_desc">
+    Hochanalytischer Verfahrenstechniker, derzeit im MSc-Studium Verfahrenstechnik an der HAW Hamburg. Experte in der Verbindung von Ingenieurgrundlagen mit digitaler Transformation: Simulationstools, Datenanalyse, Automatisierung, funktionale Sicherheit und industrielle Cybersicherheit.
   </p>
   <div class="hero-cta fade-up delay-5">
-    <a href="#projects" class="btn btn-primary">↓ View Projects</a>
-    <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="btn btn-ghost" target="_blank">Portfolio Drive ↗</a>
+    <a href="#projects" class="btn btn-primary" data-i18n="hero_cta_projects">↓ Projekte ansehen</a>
+    <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="btn btn-ghost" target="_blank" data-i18n="hero_cta_portfolio">Portfolio Drive ↗</a>
     <a href="https://linkedin.com/in/hananiah-shadrach-daniel" class="btn btn-ghost" target="_blank">LinkedIn ↗</a>
   </div>
   <div class="hero-stats fade-up delay-5">
     <div>
-      <span class="stat-num" data-target="3" data-suffix="+" data-decimals="0">0+</span>
-      <span class="stat-label">Internships</span>
+      <span class="stat-num" data-target="3" data-suffix="+" data-decimals="0">3+</span>
+      <span class="stat-label" data-i18n="stat_internships">Praktika</span>
     </div>
     <div>
-      <span class="stat-num" data-target="7" data-suffix="+" data-decimals="0">0+</span>
-      <span class="stat-label">Simulation Tools</span>
+      <span class="stat-num" data-target="7" data-suffix="+" data-decimals="0">7+</span>
+      <span class="stat-label" data-i18n="stat_tools">Simulationstools</span>
     </div>
     <div>
-      <span class="stat-num" data-target="3" data-suffix="" data-decimals="0">0</span>
-      <span class="stat-label">Languages</span>
+      <span class="stat-num" data-target="3" data-suffix="" data-decimals="0">3</span>
+      <span class="stat-label" data-i18n="stat_languages">Sprachen</span>
     </div>
     <div>
-      <span class="stat-num" data-target="2.0" data-suffix="" data-decimals="1">0.0</span>
-      <span class="stat-label">Master GPA</span>
+      <span class="stat-num" data-target="2.0" data-suffix="" data-decimals="1">2.0</span>
+      <span class="stat-label" data-i18n="stat_master_gpa">Master GPA</span>
     </div>
     <div>
-      <span class="stat-num" data-target="1.6" data-suffix="" data-decimals="1">0.0</span>
-      <span class="stat-label">Bachelor GPA</span>
+      <span class="stat-num" data-target="1.6" data-suffix="" data-decimals="1">1.6</span>
+      <span class="stat-label" data-i18n="stat_bachelor_gpa">Bachelor GPA</span>
     </div>
   </div>
 </section>
@@ -688,48 +668,45 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="section-wrap">
-    <div class="section-tag">// 01 — About Me</div>
-    <h2>Who I Am</h2>
+    <div class="section-tag" data-i18n="about_tag">// 01 — Über mich</div>
+    <h2 data-i18n="about_h2">Wer ich bin</h2>
     <div class="about-grid">
       <div class="about-text">
-        <p>
-          I'm <strong>Hananiah Shadrach Daniel</strong>, a motivated MSc student in <strong>Process Engineering at HAW Hamburg</strong>,
-          with a B.Tech in Pharmaceutical Technology (Engineering) from Anna University — graduated First Class with Distinction.
+        <p data-i18n="about_p1">
+          Ich bin <strong>Hananiah Shadrach Daniel</strong>, motivierter MSc-Student in <strong>Verfahrenstechnik an der HAW Hamburg</strong>, mit einem B.Tech in Pharmazeutischer Technologie (Ingenieurwesen) von der Anna University — Abschluss mit Auszeichnung (First Class with Distinction).
         </p>
-        <p>
-          <strong>Engineering &amp; Simulation:</strong> Proficient in process modeling, bioreactor kinetics, and thermal/Chemical process engineering. Skilled in creating digital twins and flow simulations.
+        <p data-i18n="about_p2">
+          <strong>Ingenieurwesen &amp; Simulation:</strong> Kenntnisse in Prozessmodellierung, Bioreaktorkinetik sowie thermischen/chemischen Verfahren. Erfahrung in der Erstellung digitaler Zwillinge und Strömungssimulationen.
         </p>
-        <p>
-          <strong>Data Analytics &amp; Digitalization:</strong> Expertise in transforming raw technical data into actionable insights via Power BI dashboards, KPI reporting, and Python-based analysis.
+        <p data-i18n="about_p3">
+          <strong>Datenanalyse &amp; Digitalisierung:</strong> Expertise in der Transformation technischer Rohdaten in handlungsrelevante Erkenntnisse mittels Power BI-Dashboards, KPI-Reporting und Python-basierter Analyse.
         </p>
-        <p>
-          <strong>Functional Safety &amp; Cybersecurity:</strong> Working knowledge of IEC 61508/61511 functional safety lifecycle, HAZOP/LOPA, SIL determination, and IEC 62443 / ISO 27001 aligned OT/IT cybersecurity.
+        <p data-i18n="about_p4">
+          <strong>Funktionale Sicherheit &amp; Cybersicherheit:</strong> Kenntnisse im Funktionssicherheits-Lebenszyklus nach IEC 61508/61511, HAZOP/LOPA, SIL-Bestimmung sowie IEC 62443/ISO 27001 konforme OT/IT-Cybersicherheit.
         </p>
-        <p>
-          <strong>Project Management &amp; Documentation:</strong> Experienced in structured reporting, SharePoint administration, and agile workflows (Jira/Confluence). Strong focus on version control and technical documentation.
+        <p data-i18n="about_p5">
+          <strong>Projektmanagement &amp; Dokumentation:</strong> Erfahrung in strukturiertem Berichtswesen, SharePoint-Administration und agilen Workflows (Jira/Confluence). Starker Fokus auf Versionskontrolle und technische Dokumentation.
         </p>
-        <p>
-          <strong>Quality &amp; Compliance:</strong> Solid understanding of ISO 9001, 14001, and 45001 standards, including root-cause analysis and standardized process monitoring.
+        <p data-i18n="about_p6">
+          <strong>Qualität &amp; Compliance:</strong> Fundiertes Verständnis der ISO 9001, 14001 und 45001 Standards, einschließlich Ursachenanalyse und standardisierter Prozessüberwachung.
         </p>
-        <p>
-          <strong>Operational Excellence:</strong> Competent in plant monitoring, troubleshooting, and integration of automation rigs (Arduino, Raspberry Pi) into laboratory or industrial environments. Proficient in Visual Studio Code (VSC) & Excel automation and reporting.
+        <p data-i18n="about_p7">
+          <strong>Operative Exzellenz:</strong> Kompetent in der Anlagenüberwachung, Fehlersuche und Integration von Automatisierungsrigs (Arduino, Raspberry Pi). Kenntnisse in Visual Studio Code &amp; Excel-Automatisierung.
         </p>
-        <p>
-          I'm proactive, detail-oriented, and deadline-driven. I work well independently and in teams,
-          and I'm currently seeking <strong>Full-time</strong> or <strong>part-time Werkstudent opportunities (20 hrs/week)</strong> in Hamburg —
-          immediately available.
+        <p data-i18n="about_p8">
+          Ich bin proaktiv, detailorientiert und termintreu. Ich arbeite gut selbstständig und im Team und suche derzeit <strong>Vollzeit-</strong> oder <strong>Werkstudentenstellen (20 Std./Woche)</strong> in Hamburg — sofort verfügbar.
         </p>
 
         <div style="margin-top:1.5rem;">
-          <div class="section-tag" style="margin-bottom:0.75rem;">// Languages</div>
+          <div class="section-tag" style="margin-bottom:0.75rem;" data-i18n="lang_section_tag">// Sprachen</div>
           <div class="lang-row">
             <div class="lang-chip">
               🇩🇪 Deutsch
-              <span class="lang-level">B1 — Sichere Kenntnisse</span>
+              <span class="lang-level" data-i18n="lang_de_level">B1 — Sichere Kenntnisse</span>
             </div>
             <div class="lang-chip">
               🇬🇧 English
-              <span class="lang-level">C1 — Professional</span>
+              <span class="lang-level" data-i18n="lang_en_level">C1 — Beruflich</span>
             </div>
           </div>
         </div>
@@ -737,33 +714,33 @@
 
       <div class="about-aside">
         <div class="info-row">
-          <span class="label">Current Degree</span>
-          <span class="value">MSc Process Engineering (Masters) · HAW Hamburg</span>
+          <span class="label" data-i18n="info_degree_label">Aktueller Abschluss</span>
+          <span class="value" data-i18n="info_degree_val">MSc Verfahrenstechnik · HAW Hamburg</span>
         </div>
         <div class="info-row">
-          <span class="label">Other Degrees</span>
-          <span class="value">B.Tech Pharmaceutical Technology (Bachelors) · Anna University</span>
+          <span class="label" data-i18n="info_other_label">Weitere Abschlüsse</span>
+          <span class="value" data-i18n="info_other_val">B.Tech Pharmazeutische Technologie · Anna University</span>
         </div>
         <div class="info-row">
-          <span class="label">Location</span>
-          <span class="value">Hamburg, Germany</span>
+          <span class="label" data-i18n="info_location_label">Standort</span>
+          <span class="value" data-i18n="info_location_val">Hamburg, Deutschland</span>
         </div>
         <div class="info-row">
-          <span class="label">Focus</span>
+          <span class="label" data-i18n="info_focus_label">Schwerpunkte</span>
           <span class="value" style="display:flex;gap:0.4rem;flex-wrap:wrap;justify-content:flex-end;">
-            <span class="badge badge-green">AI &amp; ML</span>
+            <span class="badge badge-green">KI &amp; ML</span>
             <span class="badge badge-blue">Simulation</span>
-            <span class="badge badge-green">Optimization</span>
-            <span class="badge badge-amber">Chemical &amp; Bioprocesses</span>
-            <span class="badge badge-blue">Process Control</span>
-            <span class="badge badge-purple">Functional Safety</span>
+            <span class="badge badge-green">Optimierung</span>
+            <span class="badge badge-amber">Chem. &amp; Bioprozesse</span>
+            <span class="badge badge-blue">Prozess kontrolle</span>
+            <span class="badge badge-purple">Funktionale Sicherheit</span>
           </span>
         </div>
         <div class="info-row">
-          <span class="label">Availability</span>
+          <span class="label" data-i18n="info_avail_label">Verfügbarkeit</span>
           <span class="value">
-            <span class="badge badge-green" style="margin-bottom:0.3rem;">● Full-Time</span>
-            <span class="badge badge-blue">● Werkstudent 20 hrs/week</span>
+            <span class="badge badge-green" style="margin-bottom:0.3rem;" data-i18n="badge_fulltime">● Vollzeit</span>
+            <span class="badge badge-blue" data-i18n="badge_werkstudent">● Werkstudent 20 Std./Woche</span>
           </span>
         </div>
         <div class="info-row">
@@ -771,8 +748,8 @@
           <span class="value"><a href="mailto:shadrach2702@gmail.com" style="color:var(--accent);text-decoration:none;">shadrach2702@gmail.com</a></span>
         </div>
         <div class="info-row">
-          <span class="label">Status</span>
-          <span class="badge badge-green">● Open to Opportunities</span>
+          <span class="label" data-i18n="info_status_label">Status</span>
+          <span class="badge badge-green" data-i18n="badge_open">● Offen für Angebote</span>
         </div>
       </div>
     </div>
@@ -782,23 +759,23 @@
 <!-- SKILLS -->
 <section id="skills">
   <div class="section-wrap">
-    <div class="section-tag">// 02 — Expertise</div>
-    <h2>Skills &amp; Tools</h2>
+    <div class="section-tag" data-i18n="skills_tag">// 02 — Expertise</div>
+    <h2 data-i18n="skills_h2">Fähigkeiten &amp; Tools</h2>
     <div class="skills-grid">
 
       <div class="skill-card">
         <div class="skill-icon">⚙️</div>
-        <h3>Process Engineering &amp; Control</h3>
-        <p>Mass/energy balances, P&amp;IDs, equipment sizing. PID tuning, Process Modelling, cascade and feedforward control. Process monitoring and deviation analysis.</p>
+        <h3 data-i18n="skill1_h3">Verfahrenstechnik &amp; Prozessregelung</h3>
+        <p data-i18n="skill1_p">Stoff-/Energiebilanzen, R&amp;I-Schemata, Apparateauslegung. PID-Abstimmung, Prozessmodellierung, Kaskaden- und Vorsteuerungsregelung. Prozessüberwachung und Abweichungsanalyse.</p>
         <div class="skill-tags">
-          <span class="skill-tag">Design</span><span class="skill-tag">Operation</span><span class="skill-tag">PID</span><span class="skill-tag">Root-Cause Analysis</span>
+          <span class="skill-tag">Design</span><span class="skill-tag">Betrieb</span><span class="skill-tag">PID</span><span class="skill-tag">Ursachenanalyse</span>
         </div>
       </div>
 
       <div class="skill-card">
         <div class="skill-icon">🖥️</div>
-        <h3>Process Simulation</h3>
-        <p>Steady-state and dynamic simulation in Aspen Plus and DWSIM. Thermodynamic package selection, sensitivity analysis, energy integration.</p>
+        <h3 data-i18n="skill2_h3">Prozesssimulation</h3>
+        <p data-i18n="skill2_p">Stationäre und dynamische Simulation in Aspen Plus und DWSIM. Auswahl thermodynamischer Pakete, Sensitivitätsanalyse, Energieintegration.</p>
         <div class="skill-tags">
           <span class="skill-tag">Aspen Plus</span><span class="skill-tag">DWSIM</span><span class="skill-tag">MATLAB</span>
         </div>
@@ -806,26 +783,26 @@
 
       <div class="skill-card">
         <div class="skill-icon">🌊</div>
-        <h3>CFD &amp; Fluid Dynamics</h3>
-        <p>Mesh generation, turbulence modeling (k-ε, SST), heat and mass transfer for reactors, mixing tanks, and heat exchangers.</p>
+        <h3 data-i18n="skill3_h3">CFD &amp; Strömungslehre</h3>
+        <p data-i18n="skill3_p">Netzgenerierung, Turbulenzmodellierung (k-ε, SST), Wärme- und Stofftransport für Reaktoren, Mischtanks und Wärmetauscher.</p>
         <div class="skill-tags">
-          <span class="skill-tag">STAR-CCM+</span><span class="skill-tag">ANSYS Fluent</span><span class="skill-tag">Turbulence</span>
+          <span class="skill-tag">STAR-CCM+</span><span class="skill-tag">ANSYS Fluent</span><span class="skill-tag">Turbulenz</span>
         </div>
       </div>
-      
+
       <div class="skill-card">
         <div class="skill-icon">🧬</div>
-        <h3>Bioprocess &amp; Pharmaceutical Systems</h3>
-        <p>Bioreactor design, kinetic modeling, sterile process design, GMP documentation, SOP creation, validation, and audit support.</p>
+        <h3 data-i18n="skill4_h3">Bioprozess- &amp; Pharmazeutische Systeme</h3>
+        <p data-i18n="skill4_p">Bioreaktorauslegung, kinetische Modellierung, sterile Prozessgestaltung, GMP-Dokumentation, SOP-Erstellung, Validierung und Audit-Support.</p>
         <div class="skill-tags">
-          <span class="skill-tag">Bioreactors</span><span class="skill-tag">GMP</span><span class="skill-tag">Validation</span><span class="skill-tag">SOPs</span>
+          <span class="skill-tag">Bioreaktoren</span><span class="skill-tag">GMP</span><span class="skill-tag">Validierung</span><span class="skill-tag">SOPs</span>
         </div>
       </div>
 
       <div class="skill-card">
         <div class="skill-icon">📊</div>
-        <h3>Data Analytics &amp; Reporting</h3>
-        <p>Statistical process control, time-series analysis, KPI dashboards, structured technical reporting, and data-driven decision support.</p>
+        <h3 data-i18n="skill5_h3">Datenanalyse &amp; Reporting</h3>
+        <p data-i18n="skill5_p">Statistische Prozesskontrolle, Zeitreihenanalyse, KPI-Dashboards, strukturierte technische Berichte und datenbasierte Entscheidungsunterstützung.</p>
         <div class="skill-tags">
           <span class="skill-tag">Power BI</span><span class="skill-tag">Python</span><span class="skill-tag">R</span><span class="skill-tag">Excel</span>
         </div>
@@ -833,27 +810,26 @@
 
       <div class="skill-card">
         <div class="skill-icon">🤖</div>
-        <h3>Automation &amp; Embedded Systems</h3>
-        <p>PLC ladder logic, SCADA HMI design, sensor integration. Hardware prototyping with Arduino and Raspberry Pi 4. Modbus communication.</p>
+        <h3 data-i18n="skill6_h3">Automatisierung &amp; Embedded Systems</h3>
+        <p data-i18n="skill6_p">SPS-Kontaktplan, SCADA-HMI-Design, Sensorintegration. Hardware-Prototyping mit Arduino und Raspberry Pi 4. Modbus-Kommunikation.</p>
         <div class="skill-tags">
           <span class="skill-tag">PLC/SCADA</span><span class="skill-tag">Arduino</span><span class="skill-tag">Raspberry Pi 4</span>
         </div>
       </div>
 
-      <!-- Excel CARD -->
       <div class="skill-card">
         <div class="skill-icon">📋</div>
-        <h3> Excel & PowerBI Automation</h3>
-        <p>Macro development for automated reporting pipelines, dynamic dashboards, data validation routines, and batch processing of engineering datasets in Excel.</p>
+        <h3 data-i18n="skill7_h3">Excel &amp; Power BI Automatisierung</h3>
+        <p data-i18n="skill7_p">Makroentwicklung für automatisierte Reporting-Pipelines, dynamische Dashboards, Datenvalidierungsroutinen und Batch-Verarbeitung technischer Datensätze.</p>
         <div class="skill-tags" style="margin-top:0.75rem;">
-          <span class="skill-tag-amber">PowerBI</span><span class="skill-tag-amber">Excel Automation</span><span class="skill-tag-amber">Dynamic Reports</span><span class="skill-tag-amber">Visual Studio Code (VSC)</span>
+          <span class="skill-tag-amber">PowerBI</span><span class="skill-tag-amber">Excel Automation</span><span class="skill-tag-amber">Dynamic Reports</span><span class="skill-tag-amber">Visual Studio Code</span>
         </div>
       </div>
-      
+
       <div class="skill-card">
         <div class="skill-icon">📁</div>
-        <h3>Project Management &amp; Documentation</h3>
-        <p>Technical documentation, structured filing, version management, PowerPoint reporting, SharePoint, Jira/Confluence, and ISO compliance.</p>
+        <h3 data-i18n="skill8_h3">Projektmanagement &amp; Dokumentation</h3>
+        <p data-i18n="skill8_p">Technische Dokumentation, strukturierte Ablage, Versionsverwaltung, PowerPoint-Reporting, SharePoint, Jira/Confluence und ISO-Compliance.</p>
         <div class="skill-tags">
           <span class="skill-tag">SharePoint</span><span class="skill-tag">Jira</span><span class="skill-tag">ISO 9001</span><span class="skill-tag">MS Office 365</span>
         </div>
@@ -861,51 +837,51 @@
 
       <div class="skill-card">
         <div class="skill-icon">🏭</div>
-        <h3>Production &amp; Quality</h3>
-        <p>Machine operation, shift support, visual/documentary quality checks, SPC, root-cause analysis, ISO 9001/14001/45001 compliance.</p>
+        <h3 data-i18n="skill9_h3">Produktion &amp; Qualität</h3>
+        <p data-i18n="skill9_p">Maschinenbedienung, Schichtunterstützung, visuelle/dokumentarische Qualitätsprüfungen, SPC, Ursachenanalyse, ISO 9001/14001/45001 Compliance.</p>
         <div class="skill-tags">
           <span class="skill-tag">SPC</span><span class="skill-tag">QC</span><span class="skill-tag">CAPA</span><span class="skill-tag">ISO</span>
         </div>
       </div>
 
-      <!-- FUNCTIONAL SAFETY CARD -->
-      <div class="skill-card" style="grid-column: span 1;">
+      <div class="skill-card">
         <div class="skill-icon">🛡️</div>
-        <h3>Functional Safety &amp; Industrial Cybersecurity</h3>
-        <p>Strong competencies spanning the full functional safety lifecycle and IT/OT cybersecurity framework for industrial control systems.</p>
-        <div class="safety-highlight">
-          <strong>Functional Safety (IEC 61508 / IEC 61511):</strong> SIL determination, SIF/SIS design, reliability analysis, safety requirements specification, HAZOP &amp; LOPA, PFD<sub>avg</sub>/PFH verification, and proof-test planning.
+        <h3 data-i18n="skill10_h3">Funktionale Sicherheit &amp; Industrielle Cybersicherheit</h3>
+        <p data-i18n="skill10_p">Umfassende Kompetenzen im funktionalen Sicherheitslebenszyklus und IT/OT-Cybersicherheitsrahmen für industrielle Leitsysteme.</p>
+        <div class="safety-highlight" data-i18n="skill10_box1">
+          <strong>Funktionale Sicherheit (IEC 61508/61511):</strong> SIL-Bestimmung, SIF/SIS-Design, Zuverlässigkeitsanalyse, Sicherheitsanforderungsspezifikation, HAZOP &amp; LOPA, PFD<sub>avg</sub>/PFH-Verifikation und Proof-Test-Planung.
         </div>
-        <div class="safety-highlight" style="margin-top:0.5rem;">
-          <strong>Industrial Cybersecurity (IEC 62443 / ISO 27001):</strong> Zone–conduit architecture, defense-in-depth, PLC/SCADA hardening, network segmentation, and secure integration of OT/IT control systems.
+        <div class="safety-highlight" style="margin-top:0.5rem;" data-i18n="skill10_box2">
+          <strong>Industrielle Cybersicherheit (IEC 62443/ISO 27001):</strong> Zonen-Konduit-Architektur, Defense-in-Depth, PLC/SCADA-Härtung, Netzwerksegmentierung und sichere Integration von OT/IT-Leitsystemen.
         </div>
         <div class="skill-tags" style="margin-top:0.75rem;">
-          <span class="skill-tag-purple">IEC 61508</span><span class="skill-tag-purple">IEC 61511</span><span class="skill-tag-purple">HAZOP</span><span class="skill-tag-purple">LOPA</span><span class="skill-tag-purple">SIL</span><span class="skill-tag-purple">IEC 62443</span><span class="skill-tag-purple">ISO 27001</span><span class="skill-tag-purple">LCA</span><span class="skill-tag-purple">FTA</span><span class="skill-tag-purple">SIF & SIS</span>
-        </div>
-        </div>
-
-      <div class="skill-card" style="grid-column: span 1;">
-        <div class="skill-icon">🤖</div>
-        <h3>AI &amp; Machine Learning</h3>
-        <p>Strong competencies spanning the full functional safety lifecycle and IT/OT cybersecurity framework for industrial control systems.</p>
-        <div class="safety-highlight">
-          <strong> Machine Learning:</strong>Supervised learning: k-Nearest Neighbors (k-NN), Linear & Logistic Regression, Decision Trees, Random Forests; Unsupervised learning: K-Means, PCA, Dimensionality Reduction; Model evaluation: Train/test splits, cross-validation, accuracy, F1-score;
-        </div>
-        <div class="safety-highlight" style="margin-top:0.5rem;">
-          <strong>Python ML Stack:</strong> NumPy – numerical computing; Pandas – data wrangling; Matplotlib / Plotly – visualization; Scikit-Learn – ML models (k-NN, SVM, clustering, pipelines); SciPy – optimization, regression, curve fitting; StatsModels – statistical modeling;
-        </div>
-         <div class="safety-highlight" style="margin-top:0.5rem;">
-          <strong>AI in Engineering & Process Systems:</strong> Prompt-generation in GPT; ML-based soft sensors; Predictive modeling for reactors & bioprocesses; Data-driven control tuning (PID optimization); Outlier detection for plant data; Regression models for CFD/CRE surrogate predictions;
-        </div>
-           <div class="skill-tags">
-          <span class="skill-tag">Numpy</span><span class="skill-tag">Panda</span><span class="skill-tag">Matplotlib</span><span class="skill-tag">Scipy</span>
-        </div>
+          <span class="skill-tag-purple">IEC 61508</span><span class="skill-tag-purple">IEC 61511</span><span class="skill-tag-purple">HAZOP</span><span class="skill-tag-purple">LOPA</span><span class="skill-tag-purple">SIL</span><span class="skill-tag-purple">IEC 62443</span><span class="skill-tag-purple">ISO 27001</span><span class="skill-tag-purple">LCA</span><span class="skill-tag-purple">FTA</span><span class="skill-tag-purple">SIF &amp; SIS</span>
         </div>
       </div>
 
+      <div class="skill-card">
+        <div class="skill-icon">🤖</div>
+        <h3 data-i18n="skill11_h3">KI &amp; Maschinelles Lernen</h3>
+        <p data-i18n="skill11_p">Starke Kompetenzen im Bereich maschinelles Lernen und KI für technische Anwendungen.</p>
+        <div class="safety-highlight" data-i18n="skill11_box1">
+          <strong>Machine Learning:</strong> Überwachtes Lernen: k-NN, Lineare &amp; Logistische Regression, Entscheidungsbäume, Random Forests; Unüberwachtes Lernen: K-Means, PCA, Dimensionsreduktion; Modellbewertung: Train/Test-Splits, Kreuzvalidierung, Genauigkeit, F1-Score.
+        </div>
+        <div class="safety-highlight" style="margin-top:0.5rem;" data-i18n="skill11_box2">
+          <strong>Python ML Stack:</strong> NumPy – numerisches Computing; Pandas – Datenverarbeitung; Matplotlib/Plotly – Visualisierung; Scikit-Learn – ML-Modelle; SciPy – Optimierung; StatsModels – statistische Modellierung.
+        </div>
+        <div class="safety-highlight" style="margin-top:0.5rem;" data-i18n="skill11_box3">
+          <strong>KI in Ingenieurwesen &amp; Prozesssystemen:</strong> Prompt-Engineering mit GPT; ML-basierte Soft-Sensoren; Prädiktive Modellierung für Reaktoren &amp; Bioprozesse; Datenbasierte PID-Optimierung; Ausreißererkennung; Regressionsmodelle für CFD-Surrogate.
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">NumPy</span><span class="skill-tag">Pandas</span><span class="skill-tag">Matplotlib</span><span class="skill-tag">SciPy</span>
+        </div>
+      </div>
+
+    </div>
+
     <!-- TOOL CHIPS -->
     <div style="margin-top:3rem;">
-      <div class="section-tag" style="margin-bottom:1.25rem;">// All Tools</div>
+      <div class="section-tag" style="margin-bottom:1.25rem;" data-i18n="tools_tag">// Alle Tools</div>
       <div class="tools-row">
         <div class="tool-chip"><span class="tool-dot" style="background:#00e5a0;"></span>Aspen Plus</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#00e5a0;"></span>DWSIM</div>
@@ -922,7 +898,7 @@
         <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>Raspberry Pi 4</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>PLC / SCADA</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>Excel</div>
-        <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>Powerpoint</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>PowerPoint</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>Visio</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>SAP</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>SharePoint</div>
@@ -937,19 +913,17 @@
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-wrap">
-    <div class="section-tag">// 03 — Projects</div>
-    <h2>Featured Work</h2>
+    <div class="section-tag" data-i18n="projects_tag">// 03 — Projekte</div>
+    <h2 data-i18n="projects_h2">Ausgewählte Arbeiten</h2>
     <div class="projects-grid">
 
       <div class="project-card">
         <div class="project-num">PRJ-001</div>
-        <h3>CFD Analysis — Counter-Current Heat Exchanger</h3>
-        <p>Conjugate heat transfer simulation with structured mesh in STAR-CCM+. Achieved &lt;1.5% deviation from analytical NTU-effectiveness method. Compared turbulence models for shell-side and tube-side flow accuracy.</p>
+        <h3 data-i18n="prj1_h3">CFD-Analyse — Gegenstrom-Wärmetauscher</h3>
+        <p data-i18n="prj1_p">Konjugierte Wärmeübertragungssimulation mit strukturiertem Netz in STAR-CCM+. &lt;1,5 % Abweichung von analytischer NTU-Effektivitätsmethode. Vergleich von Turbulenzmodellen für Mantel- und Rohrseitenströmung.</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">STAR-CCM+</span>
-            <span class="skill-tag">CFD</span>
-            <span class="skill-tag">Turbulence</span>
+            <span class="skill-tag">STAR-CCM+</span><span class="skill-tag">CFD</span><span class="skill-tag">Turbulenz</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -957,13 +931,11 @@
 
       <div class="project-card">
         <div class="project-num">PRJ-002</div>
-        <h3>Ammonia Synthesis Simulation &amp; MATLAB Modeling</h3>
-        <p>Equilibrium and PFR modeling of a multi-bed ammonia converter in DWSIM and MATLAB. Sensitivity analysis on temperature, pressure, and recycle ratio. Validated against industrial plant data.</p>
+        <h3 data-i18n="prj2_h3">Ammoniaksynthese — Simulation &amp; MATLAB-Modellierung</h3>
+        <p data-i18n="prj2_p">Gleichgewichts- und PFR-Modellierung eines mehrstufigen Ammoniakkonverters in DWSIM und MATLAB. Sensitivitätsanalyse zu Temperatur, Druck und Rücklaufverhältnis. Validierung mit industriellen Anlagendaten.</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">DWSIM</span>
-            <span class="skill-tag">Equilibrium</span>
+            <span class="skill-tag">MATLAB</span><span class="skill-tag">DWSIM</span><span class="skill-tag">Equilibrium</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -971,13 +943,11 @@
 
       <div class="project-card">
         <div class="project-num">PRJ-003</div>
-        <h3>Cost &amp; Time Estimation — Project Management</h3>
-        <p>Full project planning framework: CBS, WBS, CPM & PERT scheduling, Monte Carlo risk simulation, Earned Value Management (EVM), and Gantt chart reporting for an engineering project lifecycle.</p>
+        <h3 data-i18n="prj3_h3">Kosten- &amp; Zeitschätzung — Projektmanagement</h3>
+        <p data-i18n="prj3_p">Vollständiges Projektplanungs-Framework: CBS, PSP, CPM &amp; PERT-Terminplanung, Monte-Carlo-Risikosimulation, Earned Value Management (EVM) und Gantt-Diagramm-Reporting für einen Engineering-Projektlebenszyklus.</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">CPM/PERT</span>
-            <span class="skill-tag">Monte Carlo</span>
-            <span class="skill-tag">EVM</span>
+            <span class="skill-tag">CPM/PERT</span><span class="skill-tag">Monte Carlo</span><span class="skill-tag">EVM</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -985,13 +955,11 @@
 
       <div class="project-card">
         <div class="project-num">PRJ-004</div>
-        <h3>Cost Engineering — Hydrogen via Ammonia Cracking</h3>
-        <p>Techno-economic analysis for green hydrogen production route. CAPEX/OPEX breakdown, Levelized Cost of Hydrogen (LCOH) sensitivity, and scenario comparison across plant scales in Excel.</p>
+        <h3 data-i18n="prj4_h3">Kostenanalyse — Wasserstoff via Ammoniakcracking</h3>
+        <p data-i18n="prj4_p">Techno-ökonomische Analyse für grüne Wasserstoffproduktion. CAPEX/OPEX-Aufschlüsselung, Sensitivität der Levelized Cost of Hydrogen (LCOH) und Szenariovergleich über Anlagengrößen in Excel.</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">Excel</span>
-            <span class="skill-tag">LCOH</span>
-            <span class="skill-tag">Cost Engineering</span>
+            <span class="skill-tag">Excel</span><span class="skill-tag">LCOH</span><span class="skill-tag">Kostenanalyse</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -999,13 +967,11 @@
 
       <div class="project-card">
         <div class="project-num">PRJ-005</div>
-        <h3>Lactic Acid Recovery &amp; Purification — Process Design</h3>
-        <p>Full process design: PFD, P&amp;ID, control loop specification, pump and heating tank sizing calculations. Documented instrumentation and control philosophy for downstream bioprocess recovery.</p>
+        <h3 data-i18n="prj5_h3">Milchsäure-Rückgewinnung &amp; Aufreinigung — Prozessdesign</h3>
+        <p data-i18n="prj5_p">Vollständiges Prozessdesign: PFD, R&amp;I, Regelkreis-Spezifikation, Pumpen- und Heizkessel-Auslegungsberechnungen. Dokumentierte Instrumentierungs- und Regelungsphilosophie für Downstream-Bioprozess-Rückgewinnung.</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">PFD</span>
-            <span class="skill-tag">P&ID</span>
-            <span class="skill-tag">Process Control</span>
+            <span class="skill-tag">PFD</span><span class="skill-tag">R&ID</span><span class="skill-tag">Prozessregelung</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -1013,13 +979,11 @@
 
       <div class="project-card">
         <div class="project-num">PRJ-006</div>
-        <h3>Cellulose Extraction &amp; HPMC Conversion (IIT Madras)</h3>
-        <p>Process simulation and optimization of cellulose extraction and HPMC conversion at IIT Madras. Aspen Plus modeling, Power BI dashboards for KPI tracking, and structured lab-to-scale documentation.</p>
+        <h3 data-i18n="prj6_h3">Cellulosegewinnung &amp; HPMC-Konversion (IIT Madras)</h3>
+        <p data-i18n="prj6_p">Prozesssimulation und -optimierung der Cellulosegewinnung und HPMC-Konversion am IIT Madras. Aspen Plus-Modellierung, Power BI-Dashboards für KPI-Tracking und strukturierte Labor-zu-Maßstabs-Dokumentation.</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">Aspen Plus</span>
-            <span class="skill-tag">Power BI</span>
-            <span class="skill-tag">Bioprocess</span>
+            <span class="skill-tag">Aspen Plus</span><span class="skill-tag">Power BI</span><span class="skill-tag">Bioprozess</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -1027,13 +991,11 @@
 
       <div class="project-card">
         <div class="project-num">PRJ-007</div>
-        <h3>Modelling of Chemical Processes &amp; Control Systems</h3>
-        <p>Numerical methods, ODE solving, CRE problems, and process optimization in Python and MATLAB. Includes CSTR temperature control with PID tuning comparison (Ziegler–Nichols, IMC, relay-feedback).</p>
+        <h3 data-i18n="prj7_h3">Modellierung Chemischer Prozesse &amp; Regelungssysteme</h3>
+        <p data-i18n="prj7_p">Numerische Methoden, ODE-Lösung, CRE-Probleme und Prozessoptimierung in Python und MATLAB. CSTR-Temperaturregelung mit PID-Abstimmungsvergleich (Ziegler–Nichols, IMC, Relay-Feedback).</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">Simulink</span>
+            <span class="skill-tag">Python</span><span class="skill-tag">MATLAB</span><span class="skill-tag">Simulink</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -1041,13 +1003,11 @@
 
       <div class="project-card">
         <div class="project-num">PRJ-008</div>
-        <h3>H₂O₂ Batch Reactor Design</h3>
-        <p>Kinetics-based Excel and Python/MATLAB modeling of hydrogen peroxide batch decomposition. Batch simulation, conversion–time profiles, and sizing of jacketed reactor with safety margin analysis.</p>
+        <h3 data-i18n="prj8_h3">H₂O₂-Batch-Reaktordesign</h3>
+        <p data-i18n="prj8_p">Kinetikbasierte Excel- und Python/MATLAB-Modellierung der Wasserstoffperoxid-Batch-Zersetzung. Batch-Simulation, Umsatz-Zeit-Profile und Auslegung des Doppelmantelreaktors mit Sicherheitsmarge.</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">MATLAB</span>
-            <span class="skill-tag">Excel</span>
+            <span class="skill-tag">Python</span><span class="skill-tag">MATLAB</span><span class="skill-tag">Excel</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -1055,13 +1015,11 @@
 
       <div class="project-card">
         <div class="project-num">PRJ-009</div>
-        <h3>Digital Plant Design — Arduino + Raspberry Pi Automation</h3>
-        <p>End-to-end automation rig: sensor integration (temperature, pressure, flow), actuator control, and structured data logging via Raspberry Pi 4. Arduino used for low-level sensor interfacing and PWM control.</p>
+        <h3 data-i18n="prj9_h3">Digitales Anlagendesign — Arduino + Raspberry Pi Automatisierung</h3>
+        <p data-i18n="prj9_p">End-to-End-Automatisierungsrig: Sensorintegration (Temperatur, Druck, Durchfluss), Aktorsteuerung und strukturierte Datenprotokollierung via Raspberry Pi 4. Arduino für Low-Level-Sensoranbindung und PWM-Steuerung.</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">Arduino</span>
-            <span class="skill-tag">Raspberry Pi</span>
-            <span class="skill-tag">Python</span>
+            <span class="skill-tag">Arduino</span><span class="skill-tag">Raspberry Pi</span><span class="skill-tag">Python</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -1069,13 +1027,11 @@
 
       <div class="project-card">
         <div class="project-num">PRJ-010</div>
-        <h3>Optical Sensor Color Detection System</h3>
-        <p>Python-based optical detection system for classifying green vs white glass shards using sensor data and DOE (Design of Experiments). Optimized detection thresholds via statistical calibration and repeatability testing.</p>
+        <h3 data-i18n="prj10_h3">Optisches Sensor-Farberkennungssystem</h3>
+        <p data-i18n="prj10_p">Python-basiertes optisches Erkennungssystem zur Klassifizierung von grünen vs. weißen Glasscherben mittels Sensordaten und DOE. Optimierte Erkennungsschwellen via statistischer Kalibrierung und Wiederholbarkeitstests.</p>
         <div class="project-footer">
           <div class="project-tools">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">Sensors</span>
-            <span class="skill-tag">DOE</span>
+            <span class="skill-tag">Python</span><span class="skill-tag">Sensoren</span><span class="skill-tag">DOE</span>
           </div>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
         </div>
@@ -1088,62 +1044,62 @@
 <!-- EXPERIENCE & EDUCATION -->
 <section id="experience">
   <div class="section-wrap">
-    <div class="section-tag">// 04 — Experience &amp; Education</div>
-    <h2>Background</h2>
+    <div class="section-tag" data-i18n="exp_tag">// 04 — Erfahrung &amp; Ausbildung</div>
+    <h2 data-i18n="exp_h2">Werdegang</h2>
     <div class="timeline">
 
       <div class="timeline-item">
-        <div class="timeline-date">Oct 2025 — Present</div>
-        <h3>MSc Process Engineering</h3>
-        <div class="org">HAW Hamburg · Hamburg, Germany · GPA: 2.0</div>
+        <div class="timeline-date" data-i18n="exp1_date">Okt 2025 — Heute</div>
+        <h3 data-i18n="exp1_h3">MSc Verfahrenstechnik</h3>
+        <div class="org" data-i18n="exp1_org">HAW Hamburg · Hamburg, Deutschland · GPA: 2,0</div>
         <ul>
-          <li>Advanced process simulation, control systems, Process engineering</li>
-          <li>Working with DWSIM, STAR-CCM+, MATLAB, and Python in coursework projects</li>
+          <li data-i18n="exp1_li1">Fortgeschrittene Prozesssimulation, Regelungssysteme, Verfahrenstechnik</li>
+          <li data-i18n="exp1_li2">Arbeit mit DWSIM, STAR-CCM+, MATLAB und Python in Kursarbeiten</li>
         </ul>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-date">Jun 2024 — Dec 2024</div>
-        <h3>Project Trainee</h3>
-        <div class="org">Indian Institute of Technology (IIT) Madras · Chennai, India</div>
+        <div class="timeline-date">Jun 2024 — Dez 2024</div>
+        <h3 data-i18n="exp2_h3">Projektpraktikant</h3>
+        <div class="org" data-i18n="exp2_org">Indian Institute of Technology (IIT) Madras · Chennai, Indien</div>
         <ul>
-          <li>Project management support, technical documentation, status reports, structured filing</li>
-          <li>Process and data analysis to assess efficiency, deviations, and optimisation potential</li>
-          <li>Presentations, reports, and process documents in PowerPoint, Excel, Word</li>
-          <li>Process development, simulation, and lab experiments (1–100 L scale)</li>
-          <li>Close coordination with project and lab leadership on progress, risks, and improvements</li>
+          <li data-i18n="exp2_li1">Projektmanagement-Support, technische Dokumentation, Statusberichte, strukturierte Ablage</li>
+          <li data-i18n="exp2_li2">Prozess- und Datenanalyse zur Effizienz-, Abweichungs- und Optimierungsbewertung</li>
+          <li data-i18n="exp2_li3">Präsentationen, Berichte und Prozessdokumente in PowerPoint, Excel, Word</li>
+          <li data-i18n="exp2_li4">Prozessentwicklung, Simulation und Laborversuche (1–100 L Maßstab)</li>
+          <li data-i18n="exp2_li5">Enge Abstimmung mit Projekt- und Laborleitung zu Fortschritten, Risiken und Verbesserungen</li>
         </ul>
       </div>
 
       <div class="timeline-item">
         <div class="timeline-date">Jun 2023 — Jul 2023</div>
-        <h3>Summer Intern — Production Support &amp; SOPs</h3>
-        <div class="org">Kausikh Therapeutics Pvt Ltd · Chennai, India</div>
+        <h3 data-i18n="exp3_h3">Praktikant — Produktionssupport &amp; SOPs</h3>
+        <div class="org" data-i18n="exp3_org">Kausikh Therapeutics Pvt Ltd · Chennai, Indien</div>
         <ul>
-          <li>Created and maintained SOPs, validation documents, and technical reports</li>
-          <li>Supported small audits and organisational project tasks</li>
-          <li>Structured document filing and implementation of formal adjustments</li>
+          <li data-i18n="exp3_li1">Erstellung und Pflege von SOPs, Validierungsdokumenten und technischen Berichten</li>
+          <li data-i18n="exp3_li2">Unterstützung bei kleinen Audits und organisatorischen Projektaufgaben</li>
+          <li data-i18n="exp3_li3">Strukturierte Dokumentenablage und Implementierung formaler Anpassungen</li>
         </ul>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-date">Apr 2022 — May 2022</div>
-        <h3>Intern Trainee — Technical Plant &amp; Process Data</h3>
-        <div class="org">Teyro Labs Private Limited · Chengalpattu, India</div>
+        <div class="timeline-date">Apr 2022 — Mai 2022</div>
+        <h3 data-i18n="exp4_h3">Praktikant — Technische Anlagen- &amp; Prozessdaten</h3>
+        <div class="org" data-i18n="exp4_org">Teyro Labs Private Limited · Chengalpattu, Indien</div>
         <ul>
-          <li>Technical data collection, analysis, and preparation for decision support</li>
-          <li>Support of inspection and documentation processes</li>
-          <li>Process research and reporting to optimise operational workflows</li>
+          <li data-i18n="exp4_li1">Technische Datenerhebung, -analyse und -aufbereitung für Entscheidungsunterstützung</li>
+          <li data-i18n="exp4_li2">Unterstützung von Inspektions- und Dokumentationsprozessen</li>
+          <li data-i18n="exp4_li3">Prozessrecherche und Reporting zur Optimierung operativer Abläufe</li>
         </ul>
       </div>
 
       <div class="timeline-item">
-        <div class="timeline-date">Nov 2020 — May 2024</div>
-        <h3>B.Tech Pharmaceutical Technology (Engineering)</h3>
-        <div class="org">Anna University · ACT Campus, Chennai, India · First Class with Distinction · GPA: 1.6</div>
+        <div class="timeline-date">Nov 2020 — Mai 2024</div>
+        <h3 data-i18n="exp5_h3">B.Tech Pharmazeutische Technologie (Ingenieurwesen)</h3>
+        <div class="org" data-i18n="exp5_org">Anna University · ACT Campus, Chennai, Indien · Auszeichnung · GPA: 1,6</div>
         <ul>
-          <li>Process Engineering, Reaction Kinetics, Thermodynamics, Bioprocess Engineering</li>
-          <li>Pharmaceutical manufacturing, QA/QC, regulatory compliance</li>
+          <li data-i18n="exp5_li1">Verfahrenstechnik, Reaktionskinetik, Thermodynamik, Bioverfahrenstechnik</li>
+          <li data-i18n="exp5_li2">Pharmazeutische Fertigung, QA/QC, regulatorische Compliance</li>
         </ul>
       </div>
 
@@ -1154,16 +1110,16 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-wrap">
-    <div class="section-tag">// 05 — Get in Touch</div>
-    <h2>Contact</h2>
+    <div class="section-tag" data-i18n="contact_tag">// 05 — Kontakt aufnehmen</div>
+    <h2 data-i18n="contact_h2">Kontakt</h2>
     <div class="contact-grid">
       <div>
         <div class="mode-tabs">
-          <span class="mode-tab mode-full">● Full-Time Available</span>
-          <span class="mode-tab mode-part">● Werkstudent · 20 hrs/week</span>
+          <span class="mode-tab mode-full" data-i18n="contact_mode_full">● Vollzeit verfügbar</span>
+          <span class="mode-tab mode-part" data-i18n="contact_mode_part">● Werkstudent · 20 Std./Woche</span>
         </div>
-        <p class="contact-desc">
-          I'm available for <strong>full-time positions</strong> as well as <strong>Werkstudent / part-time roles (16–20 hrs/week)</strong> in Hamburg,Germany — immediately. Whether it's a working student position, internship, or project collaboration — reach out.
+        <p class="contact-desc" data-i18n="contact_desc">
+          Ich bin verfügbar für <strong>Vollzeitstellen</strong> sowie <strong>Werkstudenten-/Teilzeitstellen (16–20 Std./Woche)</strong> in Hamburg, Deutschland — sofort. Ob Werkstudentenstelle, Praktikum oder Projektzusammenarbeit — melden Sie sich.
         </p>
         <div class="contact-links">
           <a href="mailto:shadrach2702@gmail.com" class="contact-link">
@@ -1180,38 +1136,38 @@
           </a>
           <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="contact-link" target="_blank">
             <span class="icon">📁</span>
-            <span>Project Portfolio (Google Drive)</span>
+            <span data-i18n="contact_portfolio_label">Projekt-Portfolio (Google Drive)</span>
           </a>
         </div>
 
         <div class="avail-box">
-          <h4>⚡ Availability</h4>
+          <h4 data-i18n="avail_title">⚡ Verfügbarkeit</h4>
           <ul>
-            <li>Full-Time positions — immediately available</li>
-            <li>Werkstudent / Part-Time — 20 hours per week</li>
-            <li>Flexible shifts (day, weekend)</li>
-            <li>Weekly presence in Hamburg, Germany</li>
+            <li data-i18n="avail_li1">Vollzeitstellen — sofort verfügbar</li>
+            <li data-i18n="avail_li2">Werkstudent / Teilzeit — 20 Stunden pro Woche</li>
+            <li data-i18n="avail_li3">Flexible Schichten (Tag, Wochenende)</li>
+            <li data-i18n="avail_li4">Wöchentliche Präsenz in Hamburg, Deutschland</li>
           </ul>
         </div>
       </div>
 
       <div>
-        <div class="section-tag" style="margin-bottom:1.25rem;">// Send a Message</div>
+        <div class="section-tag" style="margin-bottom:1.25rem;" data-i18n="form_tag">// Nachricht senden</div>
         <div style="display:flex;flex-direction:column;gap:1rem;">
           <div style="display:flex;flex-direction:column;gap:0.4rem;">
-            <label style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Your Name</label>
-            <input id="f-name" type="text" placeholder="Jane Smith" style="background:var(--card);border:1px solid var(--border);border-radius:5px;padding:0.8rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" />
+            <label class="form-label" data-i18n="form_name_label">Ihr Name</label>
+            <input id="f-name" type="text" class="form-input" data-i18n-placeholder="form_name_placeholder" placeholder="Anna Schmidt" />
           </div>
           <div style="display:flex;flex-direction:column;gap:0.4rem;">
-            <label style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Email</label>
-            <input id="f-email" type="email" placeholder="jane@company.com" style="background:var(--card);border:1px solid var(--border);border-radius:5px;padding:0.8rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'" />
+            <label class="form-label">Email</label>
+            <input id="f-email" type="email" class="form-input" placeholder="anna@unternehmen.de" />
           </div>
           <div style="display:flex;flex-direction:column;gap:0.4rem;">
-            <label style="font-family:'Space Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);">Message</label>
-            <textarea id="f-msg" rows="5" placeholder="Tell me about the opportunity..." style="background:var(--card);border:1px solid var(--border);border-radius:5px;padding:0.8rem 1rem;color:var(--text);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;resize:vertical;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+            <label class="form-label" data-i18n="form_msg_label">Nachricht</label>
+            <textarea id="f-msg" rows="5" class="form-input" data-i18n-placeholder="form_msg_placeholder" placeholder="Beschreiben Sie die Stelle oder Ihr Anliegen..." style="resize:vertical;"></textarea>
           </div>
-          <a id="mailto-btn" href="#" class="btn btn-primary" style="align-self:flex-start;" onclick="sendMail(event)">Send via Email →</a>
-          <p style="font-size:0.75rem;color:var(--muted);">Opens your email client — or email directly at <a href="mailto:shadrach2702@gmail.com" style="color:var(--accent);">shadrach2702@gmail.com</a></p>
+          <a id="mailto-btn" href="#" class="btn btn-primary" style="align-self:flex-start;" onclick="sendMail(event)" data-i18n="form_send_btn">Per E-Mail senden →</a>
+          <p style="font-size:0.75rem;color:var(--muted);" data-i18n="form_hint">Öffnet Ihren E-Mail-Client — oder schreiben Sie direkt an <a href="mailto:shadrach2702@gmail.com" style="color:var(--accent);">shadrach2702@gmail.com</a></p>
         </div>
       </div>
     </div>
@@ -1219,89 +1175,388 @@
 </section>
 
 <footer>
-  <p>© 2025 Hananiah Shadrach Daniel · Hamburg, Germany</p>
-  <p>Built with HTML/CSS · Hosted on GitHub Pages</p>
+  <p>© 2025 Hananiah Shadrach Daniel · Hamburg, Deutschland</p>
+  <p data-i18n="footer_built">Erstellt mit HTML/CSS · Gehostet auf GitHub Pages</p>
 </footer>
 
 <script>
-  function sendMail(e) {
-    e.preventDefault();
-    const name = document.getElementById('f-name').value || 'A visitor';
-    const email = document.getElementById('f-email').value || '';
-    const msg = document.getElementById('f-msg').value || '';
-    const subject = encodeURIComponent('Portfolio Enquiry from ' + name);
-    const body = encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + msg);
-    window.location.href = 'mailto:shadrach2702@gmail.com?subject=' + subject + '&body=' + body;
+/* ══════════════════════════════════════════════
+   TRANSLATION DICTIONARY
+══════════════════════════════════════════════ */
+const translations = {
+  de: {
+    nav_about: "Über mich",
+    nav_skills: "Fähigkeiten",
+    nav_projects: "Projekte",
+    nav_experience: "Erfahrung",
+    nav_contact: "Kontakt",
+    hero_tag: "MSc Verfahrenstechnik · HAW Hamburg",
+    hero_title: "Verfahrenstechniker.",
+    hero_desc: "Hochanalytischer Verfahrenstechniker, derzeit im MSc-Studium Verfahrenstechnik an der HAW Hamburg. Experte in der Verbindung von Ingenieurgrundlagen mit digitaler Transformation: Simulationstools, Datenanalyse, Automatisierung, funktionale Sicherheit und industrielle Cybersicherheit zur Optimierung technischer Systeme.",
+    hero_cta_projects: "↓ Projekte ansehen",
+    hero_cta_portfolio: "Portfolio Drive ↗",
+    stat_internships: "Praktika",
+    stat_tools: "Simulationstools",
+    stat_languages: "Sprachen",
+    stat_master_gpa: "Master GPA",
+    stat_bachelor_gpa: "Bachelor GPA",
+    about_tag: "// 01 — Über mich",
+    about_h2: "Wer ich bin",
+    about_p1: "Ich bin <strong>Hananiah Shadrach Daniel</strong>, motivierter MSc-Student in <strong>Verfahrenstechnik an der HAW Hamburg</strong>, mit einem B.Tech in Pharmazeutischer Technologie (Ingenieurwesen) von der Anna University — Abschluss mit Auszeichnung (First Class with Distinction).",
+    about_p2: "<strong>Ingenieurwesen &amp; Simulation:</strong> Kenntnisse in Prozessmodellierung, Bioreaktorkinetik sowie thermischen/chemischen Verfahren. Erfahrung in der Erstellung digitaler Zwillinge und Strömungssimulationen.",
+    about_p3: "<strong>Datenanalyse &amp; Digitalisierung:</strong> Expertise in der Transformation technischer Rohdaten in handlungsrelevante Erkenntnisse mittels Power BI-Dashboards, KPI-Reporting und Python-basierter Analyse.",
+    about_p4: "<strong>Funktionale Sicherheit &amp; Cybersicherheit:</strong> Kenntnisse im Funktionssicherheits-Lebenszyklus nach IEC 61508/61511, HAZOP/LOPA, SIL-Bestimmung sowie IEC 62443/ISO 27001 konforme OT/IT-Cybersicherheit.",
+    about_p5: "<strong>Projektmanagement &amp; Dokumentation:</strong> Erfahrung in strukturiertem Berichtswesen, SharePoint-Administration und agilen Workflows (Jira/Confluence). Starker Fokus auf Versionskontrolle und technische Dokumentation.",
+    about_p6: "<strong>Qualität &amp; Compliance:</strong> Fundiertes Verständnis der ISO 9001, 14001 und 45001 Standards, einschließlich Ursachenanalyse und standardisierter Prozessüberwachung.",
+    about_p7: "<strong>Operative Exzellenz:</strong> Kompetent in der Anlagenüberwachung, Fehlersuche und Integration von Automatisierungsrigs (Arduino, Raspberry Pi). Kenntnisse in Visual Studio Code &amp; Excel-Automatisierung.",
+    about_p8: "Ich bin proaktiv, detailorientiert und termintreu. Ich arbeite gut selbstständig und im Team und suche derzeit <strong>Vollzeit-</strong> oder <strong>Werkstudentenstellen (20 Std./Woche)</strong> in Hamburg — sofort verfügbar.",
+    lang_section_tag: "// Sprachen",
+    lang_de_level: "B1 — Sichere Kenntnisse",
+    lang_en_level: "C1 — Beruflich",
+    info_degree_label: "Aktueller Abschluss",
+    info_degree_val: "MSc Verfahrenstechnik · HAW Hamburg",
+    info_other_label: "Weitere Abschlüsse",
+    info_other_val: "B.Tech Pharmazeutische Technologie · Anna University",
+    info_location_label: "Standort",
+    info_location_val: "Hamburg, Deutschland",
+    info_focus_label: "Schwerpunkte",
+    info_avail_label: "Verfügbarkeit",
+    badge_fulltime: "● Vollzeit",
+    badge_werkstudent: "● Werkstudent 20 Std./Woche",
+    info_status_label: "Status",
+    badge_open: "● Offen für Angebote",
+    skills_tag: "// 02 — Expertise",
+    skills_h2: "Fähigkeiten &amp; Tools",
+    skill1_h3: "Verfahrenstechnik &amp; Prozessregelung",
+    skill1_p: "Stoff-/Energiebilanzen, R&amp;I-Schemata, Apparateauslegung. PID-Abstimmung, Prozessmodellierung, Kaskaden- und Vorsteuerungsregelung. Prozessüberwachung und Abweichungsanalyse.",
+    skill2_h3: "Prozesssimulation",
+    skill2_p: "Stationäre und dynamische Simulation in Aspen Plus und DWSIM. Auswahl thermodynamischer Pakete, Sensitivitätsanalyse, Energieintegration.",
+    skill3_h3: "CFD &amp; Strömungslehre",
+    skill3_p: "Netzgenerierung, Turbulenzmodellierung (k-ε, SST), Wärme- und Stofftransport für Reaktoren, Mischtanks und Wärmetauscher.",
+    skill4_h3: "Bioprozess- &amp; Pharmazeutische Systeme",
+    skill4_p: "Bioreaktorauslegung, kinetische Modellierung, sterile Prozessgestaltung, GMP-Dokumentation, SOP-Erstellung, Validierung und Audit-Support.",
+    skill5_h3: "Datenanalyse &amp; Reporting",
+    skill5_p: "Statistische Prozesskontrolle, Zeitreihenanalyse, KPI-Dashboards, strukturierte technische Berichte und datenbasierte Entscheidungsunterstützung.",
+    skill6_h3: "Automatisierung &amp; Embedded Systems",
+    skill6_p: "SPS-Kontaktplan, SCADA-HMI-Design, Sensorintegration. Hardware-Prototyping mit Arduino und Raspberry Pi 4. Modbus-Kommunikation.",
+    skill7_h3: "Excel &amp; Power BI Automatisierung",
+    skill7_p: "Makroentwicklung für automatisierte Reporting-Pipelines, dynamische Dashboards, Datenvalidierungsroutinen und Batch-Verarbeitung technischer Datensätze.",
+    skill8_h3: "Projektmanagement &amp; Dokumentation",
+    skill8_p: "Technische Dokumentation, strukturierte Ablage, Versionsverwaltung, PowerPoint-Reporting, SharePoint, Jira/Confluence und ISO-Compliance.",
+    skill9_h3: "Produktion &amp; Qualität",
+    skill9_p: "Maschinenbedienung, Schichtunterstützung, visuelle/dokumentarische Qualitätsprüfungen, SPC, Ursachenanalyse, ISO 9001/14001/45001 Compliance.",
+    skill10_h3: "Funktionale Sicherheit &amp; Industrielle Cybersicherheit",
+    skill10_p: "Umfassende Kompetenzen im funktionalen Sicherheitslebenszyklus und IT/OT-Cybersicherheitsrahmen für industrielle Leitsysteme.",
+    skill10_box1: "<strong>Funktionale Sicherheit (IEC 61508/61511):</strong> SIL-Bestimmung, SIF/SIS-Design, Zuverlässigkeitsanalyse, Sicherheitsanforderungsspezifikation, HAZOP &amp; LOPA, PFD<sub>avg</sub>/PFH-Verifikation und Proof-Test-Planung.",
+    skill10_box2: "<strong>Industrielle Cybersicherheit (IEC 62443/ISO 27001):</strong> Zonen-Konduit-Architektur, Defense-in-Depth, PLC/SCADA-Härtung, Netzwerksegmentierung und sichere Integration von OT/IT-Leitsystemen.",
+    skill11_h3: "KI &amp; Maschinelles Lernen",
+    skill11_p: "Starke Kompetenzen im Bereich maschinelles Lernen und KI für technische Anwendungen.",
+    skill11_box1: "<strong>Machine Learning:</strong> Überwachtes Lernen: k-NN, Lineare &amp; Logistische Regression, Entscheidungsbäume, Random Forests; Unüberwachtes Lernen: K-Means, PCA; Modellbewertung: Kreuzvalidierung, F1-Score.",
+    skill11_box2: "<strong>Python ML Stack:</strong> NumPy – numerisches Computing; Pandas – Datenverarbeitung; Matplotlib/Plotly – Visualisierung; Scikit-Learn – ML-Modelle; SciPy – Optimierung; StatsModels – statistische Modellierung.",
+    skill11_box3: "<strong>KI in Ingenieurwesen &amp; Prozesssystemen:</strong> Prompt-Engineering mit GPT; ML-basierte Soft-Sensoren; Prädiktive Modellierung; Datenbasierte PID-Optimierung; Ausreißererkennung; Regressionsmodelle für CFD-Surrogate.",
+    tools_tag: "// Alle Tools",
+    projects_tag: "// 03 — Projekte",
+    projects_h2: "Ausgewählte Arbeiten",
+    prj1_h3: "CFD-Analyse — Gegenstrom-Wärmetauscher",
+    prj1_p: "Konjugierte Wärmeübertragungssimulation mit strukturiertem Netz in STAR-CCM+. &lt;1,5 % Abweichung von analytischer NTU-Effektivitätsmethode. Vergleich von Turbulenzmodellen für Mantel- und Rohrseitenströmung.",
+    prj2_h3: "Ammoniaksynthese — Simulation &amp; MATLAB-Modellierung",
+    prj2_p: "Gleichgewichts- und PFR-Modellierung eines mehrstufigen Ammoniakkonverters in DWSIM und MATLAB. Sensitivitätsanalyse zu Temperatur, Druck und Rücklaufverhältnis. Validierung mit industriellen Anlagendaten.",
+    prj3_h3: "Kosten- &amp; Zeitschätzung — Projektmanagement",
+    prj3_p: "Vollständiges Projektplanungs-Framework: CBS, PSP, CPM &amp; PERT-Terminplanung, Monte-Carlo-Risikosimulation, Earned Value Management (EVM) und Gantt-Diagramm-Reporting.",
+    prj4_h3: "Kostenanalyse — Wasserstoff via Ammoniakcracking",
+    prj4_p: "Techno-ökonomische Analyse für grüne Wasserstoffproduktion. CAPEX/OPEX-Aufschlüsselung, LCOH-Sensitivität und Szenariovergleich über Anlagengrößen in Excel.",
+    prj5_h3: "Milchsäure-Rückgewinnung &amp; Aufreinigung — Prozessdesign",
+    prj5_p: "Vollständiges Prozessdesign: PFD, R&amp;I, Regelkreis-Spezifikation, Pumpen- und Heizkessel-Auslegungsberechnungen. Dokumentierte Instrumentierungs- und Regelungsphilosophie.",
+    prj6_h3: "Cellulosegewinnung &amp; HPMC-Konversion (IIT Madras)",
+    prj6_p: "Prozesssimulation und -optimierung der Cellulosegewinnung und HPMC-Konversion am IIT Madras. Aspen Plus-Modellierung, Power BI-Dashboards für KPI-Tracking.",
+    prj7_h3: "Modellierung Chemischer Prozesse &amp; Regelungssysteme",
+    prj7_p: "Numerische Methoden, ODE-Lösung, CRE-Probleme und Prozessoptimierung in Python und MATLAB. CSTR-Temperaturregelung mit PID-Abstimmungsvergleich (Ziegler–Nichols, IMC, Relay-Feedback).",
+    prj8_h3: "H₂O₂-Batch-Reaktordesign",
+    prj8_p: "Kinetikbasierte Excel- und Python/MATLAB-Modellierung der Wasserstoffperoxid-Batch-Zersetzung. Batch-Simulation, Umsatz-Zeit-Profile und Reaktorauslegung mit Sicherheitsmarge.",
+    prj9_h3: "Digitales Anlagendesign — Arduino + Raspberry Pi Automatisierung",
+    prj9_p: "End-to-End-Automatisierungsrig: Sensorintegration (Temperatur, Druck, Durchfluss), Aktorsteuerung und strukturierte Datenprotokollierung via Raspberry Pi 4.",
+    prj10_h3: "Optisches Sensor-Farberkennungssystem",
+    prj10_p: "Python-basiertes optisches Erkennungssystem zur Klassifizierung von grünen vs. weißen Glasscherben mittels Sensordaten und DOE. Optimierte Erkennungsschwellen via statistischer Kalibrierung.",
+    exp_tag: "// 04 — Erfahrung &amp; Ausbildung",
+    exp_h2: "Werdegang",
+    exp1_date: "Okt 2025 — Heute",
+    exp1_h3: "MSc Verfahrenstechnik",
+    exp1_org: "HAW Hamburg · Hamburg, Deutschland · GPA: 2,0",
+    exp1_li1: "Fortgeschrittene Prozesssimulation, Regelungssysteme, Verfahrenstechnik",
+    exp1_li2: "Arbeit mit DWSIM, STAR-CCM+, MATLAB und Python in Kursarbeiten",
+    exp2_h3: "Projektpraktikant",
+    exp2_org: "Indian Institute of Technology (IIT) Madras · Chennai, Indien",
+    exp2_li1: "Projektmanagement-Support, technische Dokumentation, Statusberichte, strukturierte Ablage",
+    exp2_li2: "Prozess- und Datenanalyse zur Effizienz-, Abweichungs- und Optimierungsbewertung",
+    exp2_li3: "Präsentationen, Berichte und Prozessdokumente in PowerPoint, Excel, Word",
+    exp2_li4: "Prozessentwicklung, Simulation und Laborversuche (1–100 L Maßstab)",
+    exp2_li5: "Enge Abstimmung mit Projekt- und Laborleitung zu Fortschritten, Risiken und Verbesserungen",
+    exp3_h3: "Praktikant — Produktionssupport &amp; SOPs",
+    exp3_org: "Kausikh Therapeutics Pvt Ltd · Chennai, Indien",
+    exp3_li1: "Erstellung und Pflege von SOPs, Validierungsdokumenten und technischen Berichten",
+    exp3_li2: "Unterstützung bei kleinen Audits und organisatorischen Projektaufgaben",
+    exp3_li3: "Strukturierte Dokumentenablage und Implementierung formaler Anpassungen",
+    exp4_h3: "Praktikant — Technische Anlagen- &amp; Prozessdaten",
+    exp4_org: "Teyro Labs Private Limited · Chengalpattu, Indien",
+    exp4_li1: "Technische Datenerhebung, -analyse und -aufbereitung für Entscheidungsunterstützung",
+    exp4_li2: "Unterstützung von Inspektions- und Dokumentationsprozessen",
+    exp4_li3: "Prozessrecherche und Reporting zur Optimierung operativer Abläufe",
+    exp5_h3: "B.Tech Pharmazeutische Technologie (Ingenieurwesen)",
+    exp5_org: "Anna University · ACT Campus, Chennai, Indien · Auszeichnung · GPA: 1,6",
+    exp5_li1: "Verfahrenstechnik, Reaktionskinetik, Thermodynamik, Bioverfahrenstechnik",
+    exp5_li2: "Pharmazeutische Fertigung, QA/QC, regulatorische Compliance",
+    contact_tag: "// 05 — Kontakt aufnehmen",
+    contact_h2: "Kontakt",
+    contact_mode_full: "● Vollzeit verfügbar",
+    contact_mode_part: "● Werkstudent · 20 Std./Woche",
+    contact_desc: "Ich bin verfügbar für <strong>Vollzeitstellen</strong> sowie <strong>Werkstudenten-/Teilzeitstellen (16–20 Std./Woche)</strong> in Hamburg, Deutschland — sofort. Ob Werkstudentenstelle, Praktikum oder Projektzusammenarbeit — melden Sie sich.",
+    contact_portfolio_label: "Projekt-Portfolio (Google Drive)",
+    avail_title: "⚡ Verfügbarkeit",
+    avail_li1: "Vollzeitstellen — sofort verfügbar",
+    avail_li2: "Werkstudent / Teilzeit — 20 Stunden pro Woche",
+    avail_li3: "Flexible Schichten (Tag, Wochenende)",
+    avail_li4: "Wöchentliche Präsenz in Hamburg, Deutschland",
+    form_tag: "// Nachricht senden",
+    form_name_label: "Ihr Name",
+    form_name_placeholder: "Anna Schmidt",
+    form_msg_label: "Nachricht",
+    form_msg_placeholder: "Beschreiben Sie die Stelle oder Ihr Anliegen...",
+    form_send_btn: "Per E-Mail senden →",
+    form_hint: "Öffnet Ihren E-Mail-Client — oder schreiben Sie direkt an",
+    footer_built: "Erstellt mit HTML/CSS · Gehostet auf GitHub Pages",
+  },
+  en: {
+    nav_about: "About",
+    nav_skills: "Skills",
+    nav_projects: "Projects",
+    nav_experience: "Experience",
+    nav_contact: "Contact",
+    hero_tag: "MSc Process Engineering · HAW Hamburg",
+    hero_title: "Process Engineer.",
+    hero_desc: "Highly analytical Process Engineer, currently specializing in Process Engineering (MSc) at HAW Hamburg. Expert at bridging the gap between core engineering principles and digital transformation; leveraging simulation tools, data analytics, automation, functional safety, and industrial cybersecurity to optimize technical systems.",
+    hero_cta_projects: "↓ View Projects",
+    hero_cta_portfolio: "Portfolio Drive ↗",
+    stat_internships: "Internships",
+    stat_tools: "Simulation Tools",
+    stat_languages: "Languages",
+    stat_master_gpa: "Master GPA",
+    stat_bachelor_gpa: "Bachelor GPA",
+    about_tag: "// 01 — About Me",
+    about_h2: "Who I Am",
+    about_p1: "I'm <strong>Hananiah Shadrach Daniel</strong>, a motivated MSc student in <strong>Process Engineering at HAW Hamburg</strong>, with a B.Tech in Pharmaceutical Technology (Engineering) from Anna University — graduated First Class with Distinction.",
+    about_p2: "<strong>Engineering &amp; Simulation:</strong> Proficient in process modeling, bioreactor kinetics, and thermal/chemical process engineering. Skilled in creating digital twins and flow simulations.",
+    about_p3: "<strong>Data Analytics &amp; Digitalization:</strong> Expertise in transforming raw technical data into actionable insights via Power BI dashboards, KPI reporting, and Python-based analysis.",
+    about_p4: "<strong>Functional Safety &amp; Cybersecurity:</strong> Working knowledge of IEC 61508/61511 functional safety lifecycle, HAZOP/LOPA, SIL determination, and IEC 62443 / ISO 27001 aligned OT/IT cybersecurity.",
+    about_p5: "<strong>Project Management &amp; Documentation:</strong> Experienced in structured reporting, SharePoint administration, and agile workflows (Jira/Confluence). Strong focus on version control and technical documentation.",
+    about_p6: "<strong>Quality &amp; Compliance:</strong> Solid understanding of ISO 9001, 14001, and 45001 standards, including root-cause analysis and standardized process monitoring.",
+    about_p7: "<strong>Operational Excellence:</strong> Competent in plant monitoring, troubleshooting, and integration of automation rigs (Arduino, Raspberry Pi). Proficient in Visual Studio Code &amp; Excel automation and reporting.",
+    about_p8: "I'm proactive, detail-oriented, and deadline-driven. I work well independently and in teams, and I'm currently seeking <strong>full-time</strong> or <strong>part-time Werkstudent opportunities (20 hrs/week)</strong> in Hamburg — immediately available.",
+    lang_section_tag: "// Languages",
+    lang_de_level: "B1 — Confident",
+    lang_en_level: "C1 — Professional",
+    info_degree_label: "Current Degree",
+    info_degree_val: "MSc Process Engineering · HAW Hamburg",
+    info_other_label: "Other Degrees",
+    info_other_val: "B.Tech Pharmaceutical Technology · Anna University",
+    info_location_label: "Location",
+    info_location_val: "Hamburg, Germany",
+    info_focus_label: "Focus",
+    info_avail_label: "Availability",
+    badge_fulltime: "● Full-Time",
+    badge_werkstudent: "● Werkstudent 20 hrs/week",
+    info_status_label: "Status",
+    badge_open: "● Open to Opportunities",
+    skills_tag: "// 02 — Expertise",
+    skills_h2: "Skills &amp; Tools",
+    skill1_h3: "Process Engineering &amp; Control",
+    skill1_p: "Mass/energy balances, P&amp;IDs, equipment sizing. PID tuning, process modeling, cascade and feedforward control. Process monitoring and deviation analysis.",
+    skill2_h3: "Process Simulation",
+    skill2_p: "Steady-state and dynamic simulation in Aspen Plus and DWSIM. Thermodynamic package selection, sensitivity analysis, energy integration.",
+    skill3_h3: "CFD &amp; Fluid Dynamics",
+    skill3_p: "Mesh generation, turbulence modeling (k-ε, SST), heat and mass transfer for reactors, mixing tanks, and heat exchangers.",
+    skill4_h3: "Bioprocess &amp; Pharmaceutical Systems",
+    skill4_p: "Bioreactor design, kinetic modeling, sterile process design, GMP documentation, SOP creation, validation, and audit support.",
+    skill5_h3: "Data Analytics &amp; Reporting",
+    skill5_p: "Statistical process control, time-series analysis, KPI dashboards, structured technical reporting, and data-driven decision support.",
+    skill6_h3: "Automation &amp; Embedded Systems",
+    skill6_p: "PLC ladder logic, SCADA HMI design, sensor integration. Hardware prototyping with Arduino and Raspberry Pi 4. Modbus communication.",
+    skill7_h3: "Excel &amp; Power BI Automation",
+    skill7_p: "Macro development for automated reporting pipelines, dynamic dashboards, data validation routines, and batch processing of engineering datasets.",
+    skill8_h3: "Project Management &amp; Documentation",
+    skill8_p: "Technical documentation, structured filing, version management, PowerPoint reporting, SharePoint, Jira/Confluence, and ISO compliance.",
+    skill9_h3: "Production &amp; Quality",
+    skill9_p: "Machine operation, shift support, visual/documentary quality checks, SPC, root-cause analysis, ISO 9001/14001/45001 compliance.",
+    skill10_h3: "Functional Safety &amp; Industrial Cybersecurity",
+    skill10_p: "Strong competencies spanning the full functional safety lifecycle and IT/OT cybersecurity framework for industrial control systems.",
+    skill10_box1: "<strong>Functional Safety (IEC 61508/61511):</strong> SIL determination, SIF/SIS design, reliability analysis, safety requirements specification, HAZOP &amp; LOPA, PFD<sub>avg</sub>/PFH verification, and proof-test planning.",
+    skill10_box2: "<strong>Industrial Cybersecurity (IEC 62443/ISO 27001):</strong> Zone–conduit architecture, defense-in-depth, PLC/SCADA hardening, network segmentation, and secure integration of OT/IT control systems.",
+    skill11_h3: "AI &amp; Machine Learning",
+    skill11_p: "Strong competencies in machine learning and AI for engineering applications.",
+    skill11_box1: "<strong>Machine Learning:</strong> Supervised: k-NN, Linear &amp; Logistic Regression, Decision Trees, Random Forests; Unsupervised: K-Means, PCA; Evaluation: cross-validation, F1-score.",
+    skill11_box2: "<strong>Python ML Stack:</strong> NumPy – numerical computing; Pandas – data wrangling; Matplotlib/Plotly – visualization; Scikit-Learn – ML models; SciPy – optimization; StatsModels – statistical modeling.",
+    skill11_box3: "<strong>AI in Engineering &amp; Process Systems:</strong> Prompt-engineering with GPT; ML-based soft sensors; Predictive modeling for reactors &amp; bioprocesses; Data-driven PID tuning; Outlier detection; CFD surrogate regression.",
+    tools_tag: "// All Tools",
+    projects_tag: "// 03 — Projects",
+    projects_h2: "Featured Work",
+    prj1_h3: "CFD Analysis — Counter-Current Heat Exchanger",
+    prj1_p: "Conjugate heat transfer simulation with structured mesh in STAR-CCM+. &lt;1.5% deviation from analytical NTU-effectiveness method. Turbulence model comparison for shell-side and tube-side flow.",
+    prj2_h3: "Ammonia Synthesis — Simulation &amp; MATLAB Modeling",
+    prj2_p: "Equilibrium and PFR modeling of a multi-bed ammonia converter in DWSIM and MATLAB. Sensitivity analysis on temperature, pressure, and recycle ratio. Validated against industrial plant data.",
+    prj3_h3: "Cost &amp; Time Estimation — Project Management",
+    prj3_p: "Full project planning framework: CBS, WBS, CPM &amp; PERT scheduling, Monte Carlo risk simulation, Earned Value Management (EVM), and Gantt chart reporting.",
+    prj4_h3: "Cost Engineering — Hydrogen via Ammonia Cracking",
+    prj4_p: "Techno-economic analysis for green hydrogen production. CAPEX/OPEX breakdown, LCOH sensitivity, and scenario comparison across plant scales in Excel.",
+    prj5_h3: "Lactic Acid Recovery &amp; Purification — Process Design",
+    prj5_p: "Full process design: PFD, P&amp;ID, control loop specification, pump and heating tank sizing calculations. Documented instrumentation and control philosophy.",
+    prj6_h3: "Cellulose Extraction &amp; HPMC Conversion (IIT Madras)",
+    prj6_p: "Process simulation and optimization of cellulose extraction and HPMC conversion at IIT Madras. Aspen Plus modeling, Power BI dashboards for KPI tracking.",
+    prj7_h3: "Modeling of Chemical Processes &amp; Control Systems",
+    prj7_p: "Numerical methods, ODE solving, CRE problems, and process optimization in Python and MATLAB. CSTR temperature control with PID tuning comparison (Ziegler–Nichols, IMC, relay-feedback).",
+    prj8_h3: "H₂O₂ Batch Reactor Design",
+    prj8_p: "Kinetics-based Excel and Python/MATLAB modeling of hydrogen peroxide batch decomposition. Batch simulation, conversion–time profiles, and jacketed reactor sizing with safety margin analysis.",
+    prj9_h3: "Digital Plant Design — Arduino + Raspberry Pi Automation",
+    prj9_p: "End-to-end automation rig: sensor integration (temperature, pressure, flow), actuator control, and structured data logging via Raspberry Pi 4. Arduino for low-level sensor interfacing and PWM control.",
+    prj10_h3: "Optical Sensor Color Detection System",
+    prj10_p: "Python-based optical detection system for classifying green vs. white glass shards using sensor data and DOE. Optimized detection thresholds via statistical calibration and repeatability testing.",
+    exp_tag: "// 04 — Experience &amp; Education",
+    exp_h2: "Background",
+    exp1_date: "Oct 2025 — Present",
+    exp1_h3: "MSc Process Engineering",
+    exp1_org: "HAW Hamburg · Hamburg, Germany · GPA: 2.0",
+    exp1_li1: "Advanced process simulation, control systems, process engineering",
+    exp1_li2: "Working with DWSIM, STAR-CCM+, MATLAB, and Python in coursework projects",
+    exp2_h3: "Project Trainee",
+    exp2_org: "Indian Institute of Technology (IIT) Madras · Chennai, India",
+    exp2_li1: "Project management support, technical documentation, status reports, structured filing",
+    exp2_li2: "Process and data analysis to assess efficiency, deviations, and optimization potential",
+    exp2_li3: "Presentations, reports, and process documents in PowerPoint, Excel, Word",
+    exp2_li4: "Process development, simulation, and lab experiments (1–100 L scale)",
+    exp2_li5: "Close coordination with project and lab leadership on progress, risks, and improvements",
+    exp3_h3: "Summer Intern — Production Support &amp; SOPs",
+    exp3_org: "Kausikh Therapeutics Pvt Ltd · Chennai, India",
+    exp3_li1: "Created and maintained SOPs, validation documents, and technical reports",
+    exp3_li2: "Supported small audits and organizational project tasks",
+    exp3_li3: "Structured document filing and implementation of formal adjustments",
+    exp4_h3: "Intern Trainee — Technical Plant &amp; Process Data",
+    exp4_org: "Teyro Labs Private Limited · Chengalpattu, India",
+    exp4_li1: "Technical data collection, analysis, and preparation for decision support",
+    exp4_li2: "Support of inspection and documentation processes",
+    exp4_li3: "Process research and reporting to optimize operational workflows",
+    exp5_h3: "B.Tech Pharmaceutical Technology (Engineering)",
+    exp5_org: "Anna University · ACT Campus, Chennai, India · First Class with Distinction · GPA: 1.6",
+    exp5_li1: "Process Engineering, Reaction Kinetics, Thermodynamics, Bioprocess Engineering",
+    exp5_li2: "Pharmaceutical manufacturing, QA/QC, regulatory compliance",
+    contact_tag: "// 05 — Get in Touch",
+    contact_h2: "Contact",
+    contact_mode_full: "● Full-Time Available",
+    contact_mode_part: "● Werkstudent · 20 hrs/week",
+    contact_desc: "I'm available for <strong>full-time positions</strong> as well as <strong>Werkstudent / part-time roles (16–20 hrs/week)</strong> in Hamburg, Germany — immediately. Whether it's a working student position, internship, or project collaboration — reach out.",
+    contact_portfolio_label: "Project Portfolio (Google Drive)",
+    avail_title: "⚡ Availability",
+    avail_li1: "Full-Time positions — immediately available",
+    avail_li2: "Werkstudent / Part-Time — 20 hours per week",
+    avail_li3: "Flexible shifts (day, weekend)",
+    avail_li4: "Weekly presence in Hamburg, Germany",
+    form_tag: "// Send a Message",
+    form_name_label: "Your Name",
+    form_name_placeholder: "Jane Smith",
+    form_msg_label: "Message",
+    form_msg_placeholder: "Tell me about the opportunity...",
+    form_send_btn: "Send via Email →",
+    form_hint: "Opens your email client — or email directly at",
+    footer_built: "Built with HTML/CSS · Hosted on GitHub Pages",
   }
+};
 
-  /* ── ANIMATED NUMBER COUNTER ── */
-  function animateCounter(el) {
-    const target = parseFloat(el.dataset.target);
-    const suffix = el.dataset.suffix || '';
-    const decimals = parseInt(el.dataset.decimals) || 0;
-    const duration = 1400;
-    const startTime = performance.now();
+/* ══════════════════════════════════════════════
+   LANG ENGINE
+══════════════════════════════════════════════ */
+let currentLang = 'de';
 
-    function easeOutQuart(t) {
-      return 1 - Math.pow(1 - t, 4);
+function setLang(lang) {
+  if (lang === currentLang) return;
+  currentLang = lang;
+
+  // Update button states
+  document.getElementById('btn-de').classList.toggle('active', lang === 'de');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  // Update html lang attribute
+  document.documentElement.lang = lang;
+
+  const t = translations[lang];
+
+  // Update all [data-i18n] elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) {
+      el.innerHTML = t[key];
     }
+  });
 
-    function update(currentTime) {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = easeOutQuart(progress);
-      const current = eased * target;
+  // Update placeholder attributes
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (t[key] !== undefined) {
+      el.placeholder = t[key];
+    }
+  });
+}
 
-      el.textContent = current.toFixed(decimals) + suffix;
+/* ══════════════════════════════════════════════
+   SEND MAIL
+══════════════════════════════════════════════ */
+function sendMail(e) {
+  e.preventDefault();
+  const name = document.getElementById('f-name').value || 'A visitor';
+  const email = document.getElementById('f-email').value || '';
+  const msg = document.getElementById('f-msg').value || '';
+  const subject = encodeURIComponent('Portfolio Enquiry from ' + name);
+  const body = encodeURIComponent('From: ' + name + '\nEmail: ' + email + '\n\n' + msg);
+  window.location.href = 'mailto:shadrach2702@gmail.com?subject=' + subject + '&body=' + body;
+}
 
-      // subtle glow pulse at end
-      if (progress >= 1) {
-        el.textContent = target.toFixed(decimals) + suffix;
-        el.classList.add('glow');
-        setTimeout(() => el.classList.remove('glow'), 1200);
-        return;
-      }
-      requestAnimationFrame(update);
+/* ══════════════════════════════════════════════
+   ANIMATED NUMBER COUNTER
+══════════════════════════════════════════════ */
+function animateCounter(el) {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const decimals = parseInt(el.dataset.decimals) || 0;
+  const duration = 1400;
+  const startTime = performance.now();
+
+  function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const current = easeOutQuart(progress) * target;
+    el.textContent = current.toFixed(decimals) + suffix;
+    if (progress >= 1) {
+      el.textContent = target.toFixed(decimals) + suffix;
+      el.classList.add('glow');
+      setTimeout(() => el.classList.remove('glow'), 1200);
+      return;
     }
     requestAnimationFrame(update);
   }
-
-  // Trigger counters when hero stats enter viewport
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const statNums = entry.target.querySelectorAll('.stat-num[data-target]');
-        statNums.forEach((el, i) => {
-          setTimeout(() => animateCounter(el), i * 120);
-        });
-        statsObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.4 });
-
-  const heroStats = document.querySelector('.hero-stats');
-  if (heroStats) statsObserver.observe(heroStats);
-</script>
-<div id="google_translate_element" style="display:none;"></div>
-
-<script>
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({
-    pageLanguage: 'en',
-    includedLanguages: 'en,de,es,it,ja,ta,hi',
-    autoDisplay: false
-  }, 'google_translate_element');
+  requestAnimationFrame(update);
 }
 
-function changeLanguage(lang) {
-  const select = document.querySelector(".goog-te-combo");
-  if (select) {
-    select.value = lang;
-    select.dispatchEvent(new Event("change"));
-  }
-}
-</script>
+const statsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.stat-num[data-target]').forEach((el, i) => {
+        setTimeout(() => animateCounter(el), i * 120);
+      });
+      statsObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.4 });
 
-<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) statsObserver.observe(heroStats);
+</script>
 </body>
 </html>
