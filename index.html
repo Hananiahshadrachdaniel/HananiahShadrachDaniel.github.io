@@ -816,7 +816,31 @@
           <span class="skill-tag-amber">PowerBI</span><span class="skill-tag-amber">Excel Automation</span><span class="skill-tag-amber">Dynamic Reports</span><span class="skill-tag-amber">Visual Basic Code (VBC)</span>
         </div>
       </div>
-</div>
+<div class="vba-snippet">
+          <span class="vba-label">VBA</span>
+<span class="vba-cm">' Auto-generate process report</span>
+<span class="vba-kw">Sub</span> <span class="vba-fn">GenerateShiftReport</span>()
+  <span class="vba-kw">Dim</span> ws <span class="vba-kw">As</span> <span class="vba-type">Worksheet</span>
+  <span class="vba-kw">Dim</span> rng <span class="vba-kw">As</span> <span class="vba-type">Range</span>
+  <span class="vba-kw">Set</span> ws = Sheets(<span class="vba-str">"ProcessData"</span>)
+  ws.Range(<span class="vba-str">"B2"</span>).Value = <span class="vba-fn">Now</span>()
+  <span class="vba-fn">Call</span> <span class="vba-fn">CalcKPIs</span>(ws, <span class="vba-num">3</span>, <span class="vba-num">50</span>)
+  <span class="vba-fn">MsgBox</span> <span class="vba-str">"Report ready!"</span>
+<span class="vba-kw">End Sub</span>
+ 
+<span class="vba-kw">Sub</span> <span class="vba-fn">CalcKPIs</span>(ws, r1, r2)
+  <span class="vba-kw">Dim</span> avg <span class="vba-kw">As</span> <span class="vba-type">Double</span>
+  avg = <span class="vba-fn">WorksheetFunction</span>.<span class="vba-fn">Average</span>( _
+        ws.Range(<span class="vba-str">"C"</span>&amp;r1&amp;<span class="vba-str">":C"</span>&amp;r2))
+  ws.Range(<span class="vba-str">"E2"</span>).Value = avg
+<span class="vba-kw">End Sub</span>
+        </div>
+        <div class="skill-tags" style="margin-top:0.75rem;">
+          <span class="skill-tag-amber">VBA Macros</span><span class="skill-tag-amber">Excel Automation</span><span class="skill-tag-amber">Dynamic Reports</span><span class="skill-tag-amber">Data Pipelines</span>
+        </div>
+      </div>
+ 
+      <div class="skill-card">
       <div class="skill-card">
         <div class="skill-icon">📁</div>
         <h3>Project Management &amp; Documentation</h3>
