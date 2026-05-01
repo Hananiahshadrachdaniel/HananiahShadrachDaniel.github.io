@@ -665,7 +665,7 @@
           with a B.Tech in Pharmaceutical Technology (Engineering) from Anna University — graduated First Class with Distinction.
         </p>
         <p>
-          <strong>Engineering &amp; Simulation:</strong> Proficient in process modeling, bioreactor kinetics, and thermal/mechanical process engineering. Skilled in creating digital twins and flow simulations.
+          <strong>Engineering &amp; Simulation:</strong> Proficient in process modeling, bioreactor kinetics, and thermal/Chemical process engineering. Skilled in creating digital twins and flow simulations.
         </p>
         <p>
           <strong>Data Analytics &amp; Digitalization:</strong> Expertise in transforming raw technical data into actionable insights via Power BI dashboards, KPI reporting, and Python-based analysis.
@@ -680,7 +680,7 @@
           <strong>Quality &amp; Compliance:</strong> Solid understanding of ISO 9001, 14001, and 45001 standards, including root-cause analysis and standardized process monitoring.
         </p>
         <p>
-          <strong>Operational Excellence:</strong> Competent in plant monitoring, troubleshooting, and integration of automation rigs (Arduino, Raspberry Pi) into laboratory or industrial environments. Proficient in VBA macros for Excel automation and reporting.
+          <strong>Operational Excellence:</strong> Competent in plant monitoring, troubleshooting, and integration of automation rigs (Arduino, Raspberry Pi) into laboratory or industrial environments. Proficient in Visual Basic Code (VBC) & Excel automation and reporting.
         </p>
         <p>
           I'm proactive, detail-oriented, and deadline-driven. I work well independently and in teams,
@@ -755,18 +755,9 @@
       <div class="skill-card">
         <div class="skill-icon">⚙️</div>
         <h3>Process Engineering &amp; Control</h3>
-        <p>Mass/energy balances, P&amp;IDs, equipment sizing. PID tuning, cascade and feedforward control. Process monitoring and deviation analysis.</p>
+        <p>Mass/energy balances, P&amp;IDs, equipment sizing. PID tuning, Process Modelling, cascade and feedforward control. Process monitoring and deviation analysis.</p>
         <div class="skill-tags">
-          <span class="skill-tag">PID</span><span class="skill-tag">P&ID</span><span class="skill-tag">SOP</span><span class="skill-tag">Root-Cause</span>
-        </div>
-      </div>
-
-      <div class="skill-card">
-        <div class="skill-icon">🧬</div>
-        <h3>Bioprocess &amp; Pharmaceutical Systems</h3>
-        <p>Bioreactor design, kinetic modeling, sterile process design, GMP documentation, SOP creation, validation, and audit support.</p>
-        <div class="skill-tags">
-          <span class="skill-tag">Bioreactors</span><span class="skill-tag">GMP</span><span class="skill-tag">Validation</span><span class="skill-tag">SOPs</span>
+          <span class="skill-tag">Design</span><span class="skill-tag">Operation</span><span class="skill-tag">PID</span><span class="skill-tag">Root-Cause Analysis</span>
         </div>
       </div>
 
@@ -775,7 +766,7 @@
         <h3>Process Simulation</h3>
         <p>Steady-state and dynamic simulation in Aspen Plus and DWSIM. Thermodynamic package selection, sensitivity analysis, energy integration.</p>
         <div class="skill-tags">
-          <span class="skill-tag">Aspen Plus</span><span class="skill-tag">DWSIM</span><span class="skill-tag">Pinch Analysis</span>
+          <span class="skill-tag">Aspen Plus</span><span class="skill-tag">DWSIM</span><span class="skill-tag">MATLAB</span>
         </div>
       </div>
 
@@ -785,6 +776,15 @@
         <p>Mesh generation, turbulence modeling (k-ε, SST), heat and mass transfer for reactors, mixing tanks, and heat exchangers.</p>
         <div class="skill-tags">
           <span class="skill-tag">STAR-CCM+</span><span class="skill-tag">ANSYS Fluent</span><span class="skill-tag">Turbulence</span>
+        </div>
+      </div>
+      
+      <div class="skill-card">
+        <div class="skill-icon">🧬</div>
+        <h3>Bioprocess &amp; Pharmaceutical Systems</h3>
+        <p>Bioreactor design, kinetic modeling, sterile process design, GMP documentation, SOP creation, validation, and audit support.</p>
+        <div class="skill-tags">
+          <span class="skill-tag">Bioreactors</span><span class="skill-tag">GMP</span><span class="skill-tag">Validation</span><span class="skill-tag">SOPs</span>
         </div>
       </div>
 
@@ -806,32 +806,14 @@
         </div>
       </div>
 
-      <!-- VBA CARD -->
+      <!-- Excel CARD -->
       <div class="skill-card vba-card">
         <div class="skill-icon">📋</div>
-        <h3>VBA &amp; Excel Automation</h3>
+        <h3> Excel & PowerBI Automation</h3>
         <p>Macro development for automated reporting pipelines, dynamic dashboards, data validation routines, and batch processing of engineering datasets in Excel.</p>
-        <div class="vba-snippet">
-          <span class="vba-label">VBA</span>
-<span class="vba-cm">' Auto-generate process report</span>
-<span class="vba-kw">Sub</span> <span class="vba-fn">GenerateShiftReport</span>()
-  <span class="vba-kw">Dim</span> ws <span class="vba-kw">As</span> <span class="vba-type">Worksheet</span>
-  <span class="vba-kw">Dim</span> rng <span class="vba-kw">As</span> <span class="vba-type">Range</span>
-  <span class="vba-kw">Set</span> ws = Sheets(<span class="vba-str">"ProcessData"</span>)
-  ws.Range(<span class="vba-str">"B2"</span>).Value = <span class="vba-fn">Now</span>()
-  <span class="vba-fn">Call</span> <span class="vba-fn">CalcKPIs</span>(ws, <span class="vba-num">3</span>, <span class="vba-num">50</span>)
-  <span class="vba-fn">MsgBox</span> <span class="vba-str">"Report ready!"</span>
-<span class="vba-kw">End Sub</span>
-
-<span class="vba-kw">Sub</span> <span class="vba-fn">CalcKPIs</span>(ws, r1, r2)
-  <span class="vba-kw">Dim</span> avg <span class="vba-kw">As</span> <span class="vba-type">Double</span>
-  avg = <span class="vba-fn">WorksheetFunction</span>.<span class="vba-fn">Average</span>( _
-        ws.Range(<span class="vba-str">"C"</span>&amp;r1&amp;<span class="vba-str">":C"</span>&amp;r2))
-  ws.Range(<span class="vba-str">"E2"</span>).Value = avg
-<span class="vba-kw">End Sub</span>
         </div>
         <div class="skill-tags" style="margin-top:0.75rem;">
-          <span class="skill-tag-amber">VBA Macros</span><span class="skill-tag-amber">Excel Automation</span><span class="skill-tag-amber">Dynamic Reports</span><span class="skill-tag-amber">Data Pipelines</span>
+          <span class="skill-tag-amber">PowerBI</span><span class="skill-tag-amber">Excel Automation</span><span class="skill-tag-amber">Dynamic Reports</span><span class="skill-tag-amber">Visual Basic Code (VBC)</span>
         </div>
       </div>
 
@@ -865,7 +847,8 @@
           <strong>Industrial Cybersecurity (IEC 62443 / ISO 27001):</strong> Zone–conduit architecture, defense-in-depth, PLC/SCADA hardening, network segmentation, and secure integration of OT/IT control systems.
         </div>
         <div class="skill-tags" style="margin-top:0.75rem;">
-          <span class="skill-tag-purple">IEC 61508</span><span class="skill-tag-purple">IEC 61511</span><span class="skill-tag-purple">HAZOP</span><span class="skill-tag-purple">LOPA</span><span class="skill-tag-purple">SIL</span><span class="skill-tag-purple">IEC 62443</span><span class="skill-tag-purple">ISO 27001</span><span class="skill-tag-purple">SCADA Hardening</span>
+          <span class="skill-tag-purple">IEC 61508</span><span class="skill-tag-purple">IEC 61511</span><span class="skill-tag-purple">HAZOP</span><span class="skill-tag-purple">LOPA</span><span class="skill-tag-purple">SIL</span><span class="skill-tag-purple">IEC 62443</span><span class="skill-tag-purple">ISO 27001</span><span class="skill-tag-purple">LCA</span><span class="skill-tag-purple">SIF & SIS</span>
+        </div>
         </div>
       </div>
 
@@ -888,7 +871,9 @@
         <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>Arduino</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>Raspberry Pi 4</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#ec4899;"></span>PLC / SCADA</div>
-        <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>VBA / Excel Macros</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>Excel</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>Powerpoint</div>
+        <div class="tool-chip"><span class="tool-dot" style="background:#f59e0b;"></span>Visio</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>SAP</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>SharePoint</div>
         <div class="tool-chip"><span class="tool-dot" style="background:#6b7280;"></span>MS Office 365</div>
@@ -936,7 +921,7 @@
       <div class="project-card">
         <div class="project-num">PRJ-003</div>
         <h3>Cost &amp; Time Estimation — Project Management</h3>
-        <p>Full project planning framework: CBS, WBS, CPM/PERT scheduling, Monte Carlo risk simulation, Earned Value Management (EVM), and Gantt chart reporting for an engineering project lifecycle.</p>
+        <p>Full project planning framework: CBS, WBS, CPM & PERT scheduling, Monte Carlo risk simulation, Earned Value Management (EVM), and Gantt chart reporting for an engineering project lifecycle.</p>
         <div class="project-footer">
           <div class="project-tools">
             <span class="skill-tag">CPM/PERT</span>
@@ -1045,34 +1030,6 @@
         </div>
       </div>
 
-      <div class="project-card">
-        <div class="project-num">PRJ-011</div>
-        <h3>Fed-Batch Bioreactor Kinetic Model</h3>
-        <p>Implemented Monod kinetics for E. coli fed-batch cultivation in Python. Solved ODE system with SciPy, optimised exponential feeding strategy to maximise biomass, and performed parameter sensitivity analysis.</p>
-        <div class="project-footer">
-          <div class="project-tools">
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">SciPy</span>
-            <span class="skill-tag">Monod</span>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-num">PRJ-012</div>
-        <h3>Process Data Dashboard — Power BI</h3>
-        <p>Built an interactive Power BI dashboard for monitoring key process variables (T, P, flow). Integrated SPC charts (X-bar, R) and KPI cards for real-time shift reporting. Connected to live data via Excel/CSV pipeline.</p>
-        <div class="project-footer">
-          <div class="project-tools">
-            <span class="skill-tag">Power BI</span>
-            <span class="skill-tag">SPC</span>
-            <span class="skill-tag">DAX</span>
-          </div>
-          <a href="https://drive.google.com/drive/folders/1wQgtyFnOFdwCRjUS2VDEEmQmNCWoVrhv?usp=sharing" class="project-link" target="_blank">Drive ↗</a>
-        </div>
-      </div>
-
     </div>
   </div>
 </section>
@@ -1155,7 +1112,7 @@
           <span class="mode-tab mode-part">● Werkstudent · 20 hrs/week</span>
         </div>
         <p class="contact-desc">
-          I'm available for <strong>full-time positions</strong> as well as <strong>Werkstudent / part-time roles (16–20 hrs/week)</strong> in Hamburg — immediately. Whether it's a working student position, internship, or project collaboration — reach out.
+          I'm available for <strong>full-time positions</strong> as well as <strong>Werkstudent / part-time roles (16–20 hrs/week)</strong> in Hamburg,Germany — immediately. Whether it's a working student position, internship, or project collaboration — reach out.
         </p>
         <div class="contact-links">
           <a href="mailto:shadrach2702@gmail.com" class="contact-link">
@@ -1180,10 +1137,9 @@
           <h4>⚡ Availability</h4>
           <ul>
             <li>Full-Time positions — immediately available</li>
-            <li>Werkstudent / Part-Time — 16–20 hours per week</li>
+            <li>Werkstudent / Part-Time — 20 hours per week</li>
             <li>Flexible shifts (day, weekend)</li>
-            <li>Weekly presence in Hamburg</li>
-            <li>Physically fit — can lift up to 25 kg</li>
+            <li>Weekly presence in Hamburg, Germany</li>
           </ul>
         </div>
       </div>
